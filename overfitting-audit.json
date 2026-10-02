@@ -1,0 +1,24 @@
+{
+  "schema": "tdsc-overfitting-and-packaging-audit",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "status": "PASS_NO_TRAINING_FITTING_POST_OUTCOME_SELECTION_OR_EXTRAPOLATION_DETECTED",
+  "model_training": false,
+  "parameter_fitting": false,
+  "timing_outlier_deletion": false,
+  "regression_fit_or_extrapolation": false,
+  "negative_controls_preserved": true,
+  "regression_cases_added_after_code_inspection": true,
+  "new_tests_are_blind_holdout": false,
+  "finite_lattice_is_real_attack_distribution": false,
+  "probability_grid_is_uniform_proof": false,
+  "reference_count_is_novelty_evidence": false,
+  "limits": [
+    "finite visible carrier only",
+    "no production-watermark generalization",
+    "42 rows, 384 cells, and five architectures are one truth-table mapping",
+    "historywise shift requires conditional-kernel domination",
+    "upper certificate may exceed one before final capping",
+    "timings describe one recorded CPU allocation",
+    "internal regression tests do not replace independent review"
+  ]
+}

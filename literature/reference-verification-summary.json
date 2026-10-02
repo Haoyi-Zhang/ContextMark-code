@@ -1,0 +1,17 @@
+{
+  "schema": "reference-verification-summary",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "reference_count": 66,
+  "formal_publication_entries": 61,
+  "arxiv_cited_versions": 5,
+  "verification_levels": {
+    "BIBLIOGRAPHIC_RECORD_ONLY_PRIMARY_FULLTEXT_NOT_RETRIEVED": 18,
+    "PRIMARY_INSTITUTIONAL_METADATA": 5,
+    "PRIMARY_RECORD_OR_AUTHOR_ABSTRACT": 43
+  },
+  "all_full_texts_read": false,
+  "priority_guaranteed": false,
+  "claim_limits": "Metadata and each local support claim were rechecked. The ledger states whether evidence came from a primary record, institutional metadata, or bibliographic record. Complete full-text rereading is not claimed.",
+  "main_tex_sha256": "f8f1dda50111ec019ea407e9849fb36eda76e9e23b54da458d65ef4ad95f0c33",
+  "bib_sha256": "c2f1886eadd742be3f7827715c903882ef5e3ea5686292071bfbefdec8d84263"
+}

@@ -1,0 +1,15 @@
+{
+  "budget_rejected": true,
+  "calls_after_initial": 1,
+  "calls_after_retry": 1,
+  "initial_failed": true,
+  "passed": true,
+  "restored_backend_calls": 0,
+  "restored_retry_failed": true,
+  "retry_failed": true,
+  "status_counts": [
+    0,
+    1,
+    1
+  ]
+}

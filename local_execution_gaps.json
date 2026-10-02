@@ -1,0 +1,13 @@
+{
+  "schema": "tdsc-local-execution-gaps-v2",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "gaps": [
+    {
+      "gap": "pinned_in_toto_dependency",
+      "attempt": "Pinned in-toto release metadata and verifier source were inspected and local dependency acquisition was attempted.",
+      "reason": "The required pinned dependency was unavailable in the current execution environment.",
+      "claim_control": "No in-toto execution, latency, attack result, or robustness score is claimed.",
+      "required_external_action": "Run the documented adapter and attacks in an environment that can acquire the pinned dependency."
+    }
+  ]
+}

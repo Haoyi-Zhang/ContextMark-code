@@ -1,0 +1,55 @@
+{
+  "schema": "tdsc-submission-materials-map",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "status": "SUBMISSION_HOLD_AUTHORSHIP_INTENT_UNRESOLVED",
+  "rows": [
+    {
+      "material": "main manuscript",
+      "required_or_allowed": "required",
+      "path": "paper/main.pdf",
+      "format": "IEEE journal double-column PDF and editable LaTeX source",
+      "page_treatment": "counts; current article is 14 pages",
+      "channel": "main manuscript"
+    },
+    {
+      "material": "supplement",
+      "required_or_allowed": "allowed and used",
+      "path": "paper/supplement.pdf",
+      "format": "standalone PDF",
+      "page_treatment": "separate from article page count",
+      "channel": "supplemental material"
+    },
+    {
+      "material": "author metadata",
+      "required_or_allowed": "required in portal",
+      "path": "artifact/author-metadata.json",
+      "format": "three identified authors, three unresolved reserved positions; see AUTHORSHIP-CONFIRMATION-REQUIRED.md",
+      "page_treatment": "not applicable",
+      "channel": "submission metadata"
+    },
+    {
+      "material": "AI-use disclosure",
+      "required_or_allowed": "required for actual workflow",
+      "path": "paper/main.tex acknowledgment",
+      "format": "systems, affected content, and level of use",
+      "page_treatment": "counts",
+      "channel": "main manuscript and portal declaration"
+    },
+    {
+      "material": "biographies/photos",
+      "required_or_allowed": "not required initially",
+      "path": "not included",
+      "format": "prepare after acceptance if requested",
+      "page_treatment": "not present",
+      "channel": "final publication materials"
+    },
+    {
+      "material": "research artifact",
+      "required_or_allowed": "optional",
+      "path": "TDSC-01.zip",
+      "format": "source, tests, results, ledgers",
+      "page_treatment": "not applicable",
+      "channel": "artifact or supplemental channel, not the article PDF"
+    }
+  ]
+}

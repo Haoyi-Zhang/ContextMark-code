@@ -1,0 +1,31 @@
+{
+  "schema": "tdsc-boundary-witnesses-v2",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "pre_repair_witnesses": {
+    "loose_certificate": {
+      "uncapped_certificate": 1.5,
+      "required_final_cap": 1.0
+    },
+    "hidden_noncanonical_field": {
+      "artifact_field": "_threshold_carriers",
+      "value": [
+        1.5
+      ],
+      "binder_ignores_field": true,
+      "reader_must_reject_complete_artifact": true
+    },
+    "verifier_exceptions": {
+      "binder_RuntimeError": "reject",
+      "reader_RuntimeError": "reject"
+    },
+    "truth_table_views": {
+      "row_count": 42,
+      "lattice_cells": 384,
+      "architecture_names": 5,
+      "shared_rule": "REQUIRED",
+      "independent_interaction_evidence": false
+    }
+  },
+  "current_regression_status": "CLOSED_BY_TESTS_AND_ASSURANCE_CHECKS",
+  "evidence": "artifact/results/raw/proof-implementation-checks.json; artifact/results/raw/run-summary.json; artifact/tests/"
+}

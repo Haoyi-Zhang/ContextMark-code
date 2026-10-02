@@ -1,0 +1,4 @@
+payload_groups,samples,median_mark_total_us,p95_mark_total_us,median_read_us,p95_read_us,all_candidate_sets_and_canonical_reads_passed
+1,31,185.77,285.299,585.472,704.432,True
+2,31,417.178,546.243,1052.195,1352.177,True
+3,31,741.978,963.541,1560.05,1990.909,True

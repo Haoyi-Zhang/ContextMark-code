@@ -1,0 +1,41 @@
+document,entry,kind,title,line,mechanized
+paper/main.tex,1,definition,Binder stability and separation,164,False
+paper/main.tex,2,definition,Removal,177,False
+paper/main.tex,3,proposition,Clean-copy impossibility,181,False
+paper/main.tex,4,definition,Non-transferability,187,False
+paper/main.tex,5,definition,Payload unforgeability,193,False
+paper/main.tex,6,definition,Coalition trace survival,199,False
+paper/main.tex,7,proposition,Linearizable one-attempt issuance,270,False
+paper/main.tex,8,proposition,Verified-tip refinement,283,False
+paper/main.tex,9,lemma,Honest correctness,294,False
+paper/main.tex,10,lemma,Accepted-chain classification,301,False
+paper/main.tex,11,lemma,Exact-tip acceptance,308,False
+paper/main.tex,12,lemma,Host-intersection bound,315,False
+paper/main.tex,13,proposition,Public authorization closure,327,False
+paper/main.tex,14,proposition,Failure cannot multiply samples,334,False
+paper/main.tex,15,theorem,Stopped first-hit composition,357,False
+paper/main.tex,16,theorem,Context-bound compiler composition,403,False
+paper/main.tex,17,theorem,Evidence-conditioned composition,515,False
+paper/main.tex,18,proposition,Derivation-graph lifting,548,False
+paper/main.tex,19,proposition,Multi-lineage lifting,564,False
+paper/main.tex,20,proposition,Finite threshold reader semantics,638,False
+paper/main.tex,21,lemma,Parser--authorization alignment,650,False
+paper/main.tex,22,proposition,One-basis residual validation,659,False
+paper/main.tex,23,proposition,Monotone conservative substitution,849,False
+paper/supplement.tex,1,proposition,One-attempt issuance,96,False
+paper/supplement.tex,2,proposition,Resume continuity,108,False
+paper/supplement.tex,3,lemma,Honest correctness,129,False
+paper/supplement.tex,4,proposition,Clean-copy impossibility,160,False
+paper/supplement.tex,5,lemma,Accepted-chain classification,197,False
+paper/supplement.tex,6,lemma,Exact-tip acceptance,205,False
+paper/supplement.tex,7,lemma,Host-intersection bound,213,False
+paper/supplement.tex,8,theorem,First-hit identity and bound,238,False
+paper/supplement.tex,9,theorem,Context-bound composition,266,False
+paper/supplement.tex,10,theorem,Evidence-conditioned composition,296,False
+paper/supplement.tex,11,corollary,Anytime exact Bernoulli calibration,307,False
+paper/supplement.tex,12,proposition,Historywise conditional-kernel bridge,319,False
+paper/supplement.tex,13,proposition,Derivation-graph lifting,337,False
+paper/supplement.tex,14,proposition,Stateless fork boundary,345,False
+paper/supplement.tex,15,proposition,Polynomial residual equivalence,382,False
+paper/supplement.tex,16,theorem,Finite threshold reader semantics,392,False
+paper/supplement.tex,17,corollary,Compiled distinct-context coalition,410,False

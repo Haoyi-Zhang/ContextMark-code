@@ -1,0 +1,42 @@
+{
+  "schema": "reference-integrity-audit",
+  "generated_utc": "2026-09-26T09:27:49Z",
+  "status": "PASS",
+  "bibliography_entries": 66,
+  "verification_rows": 66,
+  "citation_support_rows": 66,
+  "formal_publications": 61,
+  "scholarly_preprints": 5,
+  "preprint_keys": [
+    "zkcompile2026",
+    "matrix2026",
+    "lineagemark2026",
+    "rosemary2025",
+    "authcontradictions2026"
+  ],
+  "verification_levels": {
+    "BIBLIOGRAPHIC_RECORD_ONLY_PRIMARY_FULLTEXT_NOT_RETRIEVED": 18,
+    "PRIMARY_INSTITUTIONAL_METADATA": 5,
+    "PRIMARY_RECORD_OR_AUTHOR_ABSTRACT": 43
+  },
+  "all_full_texts_read": false,
+  "unique_normalized_titles": 66,
+  "duplicate_normalized_titles": 0,
+  "unique_identifiers": 66,
+  "duplicate_identifiers": 0,
+  "all_entries_used": true,
+  "all_entries_used_exactly_once": true,
+  "single_key_citation_commands": 66,
+  "multi_key_commands": 0,
+  "undefined_keys": [],
+  "uncited_entries": [],
+  "websites_documentation_repositories_or_blogs_in_bibliography": 0,
+  "frozen_reference_floor": 58,
+  "current_reference_count": 66,
+  "floor_satisfied": true,
+  "main_tex_sha256": "f8f1dda50111ec019ea407e9849fb36eda76e9e23b54da458d65ef4ad95f0c33",
+  "references_bib_sha256": "c2f1886eadd742be3f7827715c903882ef5e3ea5686292071bfbefdec8d84263",
+  "verification_ledger_sha256": "3084013d426d2c286bdbf1e4c461db8a21f8da718b02a788116bbb8f1ed9e96a",
+  "citation_support_sha256": "e037f25c769959fee168d919f9508021acc718b1ff1b6ad76f563a9049e7c2e4",
+  "claim_limits": "Metadata and each local support claim were rechecked. The ledger states whether evidence came from a primary record, institutional metadata, or bibliographic record. Complete full-text rereading is not claimed."
+}

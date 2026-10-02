@@ -1,0 +1,37 @@
+{
+  "schema": "tdsc-visible-text-audit-v4",
+  "generated_utc": "2026-09-26T09:32:28Z",
+  "status": "PASS",
+  "documents": [
+    "paper/main.pdf",
+    "paper/supplement.pdf"
+  ],
+  "document_sha256": {
+    "paper/main.pdf": "62390f770b190a4f87e9b72096fd18cf1b89a9478cdef81ffa6f24d783c24476",
+    "paper/supplement.pdf": "cad990f67a03455cdaa8b90d59409ff7c63ebc9ee082defde55f201bf31837c0"
+  },
+  "allowed_author_emails": [
+    "huaijin003@e.ntu.edu.sg",
+    "hyeliozhang@gmail.com",
+    "realdanieltang@gmail.com"
+  ],
+  "observed_author_emails": [
+    "huaijin003@e.ntu.edu.sg",
+    "hyeliozhang@gmail.com",
+    "realdanieltang@gmail.com"
+  ],
+  "required_ai_disclosure": {
+    "present": true,
+    "classification": "REQUIRED_POLICY_DISCLOSURE_NOT_PRIVATE_PROCESS_LEAK"
+  },
+  "findings": {
+    "local_path": [],
+    "file_extension": [],
+    "private_prompt_terms": [],
+    "implementation_identifiers": [],
+    "double_underscore": [],
+    "literal_underscore": [],
+    "unexpected_email": []
+  },
+  "verdict": "PASS_NO_LOCAL_PATH_FILE_FUNCTION_CLASS_PRIVATE_PROMPT_OR_UNEXPECTED_EMAIL; REQUIRED_AI_DISCLOSURE_PRESENT"
+}

@@ -1,0 +1,14 @@
+{
+  "evidence_kind": "truth_table_consistency",
+  "independent_interaction_evidence": false,
+  "limitation": "The five rows are named configurations of the same six-Boolean evaluator, not independent mechanism executions.",
+  "schema": "factorized-architecture-truth-table-v1",
+  "shared_rule": "REQUIRED",
+  "successful_attack_counts": {
+    "complete": 0,
+    "context_mark_without_parents": 1,
+    "detached_records": 4,
+    "host_bound_owner_mark": 4,
+    "signed_owner_mark": 3
+  }
+}

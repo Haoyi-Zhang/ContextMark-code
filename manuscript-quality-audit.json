@@ -1,0 +1,27 @@
+{
+  "schema": "tdsc-manuscript-quality-audit",
+  "generated_utc": "2026-09-26T09:32:28Z",
+  "status": "PASS_INTERNAL_MANUSCRIPT_AND_VISUAL_GATES",
+  "narrative_order": [
+    "system problem",
+    "composition gap",
+    "running example",
+    "primitive contracts",
+    "compiler",
+    "four games",
+    "reductions",
+    "boundary cases",
+    "executable evidence",
+    "cost",
+    "instantiation discipline",
+    "related work",
+    "limitations and conclusion"
+  ],
+  "overclaim_scan": "PASS_NO_FIRST_UNIVERSAL_PRODUCTION_READY_OR_BEST_PAPER_CLAIM",
+  "reference_verdict": "66 scholarly records; every key used exactly once by one local single-key citation",
+  "author_verdict": "three identified authors plus three unresolved reserved slots; no identities or contributions inferred",
+  "visual_verdict": "PASS_NO_OVERLAP_OCCLUSION_CLIPPING_BROKEN_GLYPH_BLANK_TAIL_OR_RENDERER_SPECIFIC_LOSS",
+  "submission_verdict": "HOLD_AUTHORSHIP_INTENT_PRODUCTION_VALIDATION_AND_INDEPENDENT_REVIEW",
+  "abstract_words": 196,
+  "page_fit_verdict": "PASS_EXACT_14_PAGES_BOTH_COLUMNS_WITHIN_ONE_NORMAL_LINE"
+}

@@ -1,0 +1,29 @@
+{
+  "complete_successful_attacks": 0,
+  "evidence_kind": "truth_table_consistency",
+  "independent_interaction_evidence": false,
+  "row_count": 42,
+  "schema": "factorized-truth-table-consistency-v1",
+  "shared_rule": "REQUIRED",
+  "valid": true,
+  "weakened_successes": {
+    "without_collusion_robustness": [
+      "two_copy_cancellation"
+    ],
+    "without_host_binding": [
+      "transplant_trace"
+    ],
+    "without_key_isolation": [
+      "adaptive_key_forgery"
+    ],
+    "without_one_copy_removal": [
+      "delete_trace"
+    ],
+    "without_parent_links": [
+      "parent_free_splice"
+    ],
+    "without_tip_binding": [
+      "replay_under_other_tip"
+    ]
+  }
+}

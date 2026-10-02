@@ -1,0 +1,15 @@
+{
+  "resource": "in-toto/in-toto",
+  "tag": "v3.1.0",
+  "release_url": "https://api.github.com/repos/in-toto/in-toto/releases/latest",
+  "source_excerpt": "https://github.com/in-toto/in-toto/blob/v3.1.0/in_toto/verifylib.py",
+  "lines_read": [
+    1,
+    110
+  ],
+  "source_git_blob": "cae4498bb0636c68b814e8b4d8dba5c0cef29b76",
+  "wheel_expected_sha256": "9a5e73c8e983cdfdfb153760d532893ec0260597c09724ad875ce7950e294a79",
+  "source_tar_expected_sha256": "56b02363e0eb74be3365faf98a60f6d2c3c6a06419be7fcb4dd59e0d1b86fb09",
+  "artifact_bytes_downloaded": false,
+  "statement": "Upstream metadata and a verifier source excerpt were read through the GitHub connector. Expected hashes are upstream metadata, not local downloaded-artifact hashes."
+}

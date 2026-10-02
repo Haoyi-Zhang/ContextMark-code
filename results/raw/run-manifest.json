@@ -1,0 +1,338 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. sh run_experiments_sharded.sh",
+  "entries": [
+    {
+      "bytes": 57,
+      "path": "contextmark/__init__.py",
+      "sha256": "a7c726938cd75af4f8b64f4ddabede22ca9f7f91b15187a10bdb52129bfc4e13"
+    },
+    {
+      "bytes": 4303,
+      "path": "contextmark/assurance_checks.py",
+      "sha256": "74b6c9d08a8b15e4f1efed2656573a1f510ce2b2727e74a84e392ea1fd83ceee"
+    },
+    {
+      "bytes": 7564,
+      "path": "contextmark/bounds.py",
+      "sha256": "94f924f5d0d69581e964b670b6738205acfd41344132e7c95cddb95bb6e80449"
+    },
+    {
+      "bytes": 3292,
+      "path": "contextmark/calibration.py",
+      "sha256": "cf78e1be0e6f3036e11ddc1456248f9ecab811fec80642a266a9a05baec176ba"
+    },
+    {
+      "bytes": 20360,
+      "path": "contextmark/campaigns.py",
+      "sha256": "eac4d7efec96bdffe9a25bebd553c505b76bcc9595ffe033d8476fd3fb1be597"
+    },
+    {
+      "bytes": 2392,
+      "path": "contextmark/canonical.py",
+      "sha256": "5a059d3ce7c02d1a17dc0c395aed8c80156be3ca4b9b94827191ff4acbd3caba"
+    },
+    {
+      "bytes": 31430,
+      "path": "contextmark/compiler.py",
+      "sha256": "09996a0e0664cccbe896f764720a5f26c1f00f8a28390a8033984192ddfe2e1d"
+    },
+    {
+      "bytes": 4954,
+      "path": "contextmark/finite_model.py",
+      "sha256": "4417ec4948efe6152c280179def0373a5de56ab61913f1b0b994bc8ad20415ab"
+    },
+    {
+      "bytes": 12982,
+      "path": "contextmark/threshold_backend.py",
+      "sha256": "04bc664be77e3d69691c9c48a6f26bd754c2b4d171255ec3e0921fccdd4a8790"
+    },
+    {
+      "bytes": 35,
+      "path": "requirements.txt",
+      "sha256": "1ea8ed1a42f2f21e78c6613733d6cf970b92ee9c7f1835c35d479bead77eaec1"
+    },
+    {
+      "bytes": 3989,
+      "path": "results/derived/compiler-replay-scaling.csv",
+      "sha256": "08b8d60a4eebb9724aac129a522d78491d1604a200d16a48cf67765815b8e7e5"
+    },
+    {
+      "bytes": 5075,
+      "path": "results/derived/compiler-scaling.csv",
+      "sha256": "7eea58328923d3b9687ef80065a2d77478d87a0a7811d18979bafe1fea4d89fa"
+    },
+    {
+      "bytes": 5234,
+      "path": "results/derived/optional-stopping-coverage.csv",
+      "sha256": "cf4fadb18bdbd5831fa73b66c9a1b5d7354a2e1dae8111f89c871edd81f1c686"
+    },
+    {
+      "bytes": 90,
+      "path": "results/derived/query-caps.csv",
+      "sha256": "d765ffc5ddb7107151a9963a45c98087da748f0e44664890ac0bc5b27a9829fb"
+    },
+    {
+      "bytes": 354,
+      "path": "results/derived/residual-subset-timing.csv",
+      "sha256": "8fb9ce745bc15e08435a0f28a2331d551d2ce898053fa59d63df22cd17948a96"
+    },
+    {
+      "bytes": 543,
+      "path": "results/derived/security-collusion.csv",
+      "sha256": "c2e2a41bf923d5655722c21d2bf9e031db7ccd6f352237b1e3c0aa052a23a173"
+    },
+    {
+      "bytes": 568,
+      "path": "results/derived/security-nontransfer.csv",
+      "sha256": "04021c2c0e5ccfa0bfdcb542fe8675b55ea890370f077e0298aa5f134aceeb7b"
+    },
+    {
+      "bytes": 590,
+      "path": "results/derived/security-removal.csv",
+      "sha256": "252c26b98e1e34fbfde9225a7aa7c840429b4decb3c8d288bb482ff6134362c1"
+    },
+    {
+      "bytes": 634,
+      "path": "results/derived/security-unforgeability.csv",
+      "sha256": "46222a8cd35749c08466feb990b23cff96b88402d2436988ad1fce6687352729"
+    },
+    {
+      "bytes": 267,
+      "path": "results/derived/threshold-carrier-timing.csv",
+      "sha256": "662597da58ff3993430f72c6768a25d2f1145e478dd135224cdab2f3edd69e17"
+    },
+    {
+      "bytes": 489,
+      "path": "results/raw/architecture-baseline-summary.json",
+      "sha256": "d6d3dc640948e1995eb2123c8ab065b2bd14f0bfaaca7da82fa1ddc338ed597a"
+    },
+    {
+      "bytes": 2720,
+      "path": "results/raw/architecture-baselines.csv",
+      "sha256": "355df8ce49e19928bbd6ad3c95854aa68526a6bf2d9ab2def2a5cfe727cb573d"
+    },
+    {
+      "bytes": 25065,
+      "path": "results/raw/benchmark-shards/depth-1.json",
+      "sha256": "5c95358d199fe9e9294bcb780a6a82f522fd3b8244b84cc1dc2859ea61f86397"
+    },
+    {
+      "bytes": 24963,
+      "path": "results/raw/benchmark-shards/depth-1024.json",
+      "sha256": "ec28a36124d2e3851f5611743e3c1044f9d3d4fd6d7da8d745025d7a25ece83b"
+    },
+    {
+      "bytes": 25747,
+      "path": "results/raw/benchmark-shards/depth-128.json",
+      "sha256": "ffd5285568fc8ec8da265ddd169172202fae3d483b18b20e275ca94c1253b180"
+    },
+    {
+      "bytes": 25474,
+      "path": "results/raw/benchmark-shards/depth-16.json",
+      "sha256": "d39d03562ff2f165186876b84ab179409105367b92e6d78704d4abdbcc7b9ced"
+    },
+    {
+      "bytes": 25166,
+      "path": "results/raw/benchmark-shards/depth-2.json",
+      "sha256": "231c51291f36b86b4e7d1d1799d26fa12219ea7089f828cbce496b271cecf388"
+    },
+    {
+      "bytes": 25101,
+      "path": "results/raw/benchmark-shards/depth-2048.json",
+      "sha256": "7e01f586c0cb9ff4bc05e4891fe8fe64dd6bcc612883ca75447f80c4d43e4bbd"
+    },
+    {
+      "bytes": 25868,
+      "path": "results/raw/benchmark-shards/depth-256.json",
+      "sha256": "cd348f08c881d961808890e9eaa5583ed92c013e2cf84b421ddc13d280d25479"
+    },
+    {
+      "bytes": 25497,
+      "path": "results/raw/benchmark-shards/depth-32.json",
+      "sha256": "5ef9774eca39368f991b5461682ccab21780e7c0611df24b0e9a1ec89f536020"
+    },
+    {
+      "bytes": 25152,
+      "path": "results/raw/benchmark-shards/depth-4.json",
+      "sha256": "28b501192567b4c7e5383f15b55ca83c3e2bdf96dffec8feb0b6a3e40f6ba375"
+    },
+    {
+      "bytes": 24773,
+      "path": "results/raw/benchmark-shards/depth-512.json",
+      "sha256": "56cea1e17a9a913afceea42deb1dbdf0a1f976b44d8d97e9272c2910b361e74e"
+    },
+    {
+      "bytes": 25528,
+      "path": "results/raw/benchmark-shards/depth-64.json",
+      "sha256": "dffc06ba0d50702e264a45aa5109ce15e9257d601d11ceb6659fb63fba623a12"
+    },
+    {
+      "bytes": 25192,
+      "path": "results/raw/benchmark-shards/depth-8.json",
+      "sha256": "e54e570e45ee1d6eebeb10a68e1b7def4eeab324e6b94ae0e6307fffe59036b3"
+    },
+    {
+      "bytes": 405,
+      "path": "results/raw/bound-inputs-and-caps.json",
+      "sha256": "35bcd8271e8ae0cf8d80fde21ea565182e5560d7e0922ed994e07b4ef4ece561"
+    },
+    {
+      "bytes": 86825,
+      "path": "results/raw/compiler-scaling-samples.csv",
+      "sha256": "4c26cdc7a7ddeea1ae8bbdc1063738395e45a508c66b29e56c5d21e054c089cd"
+    },
+    {
+      "bytes": 447,
+      "path": "results/raw/environment.json",
+      "sha256": "1e369d1d5446ea287d83111585c36ee505499b03b8d6917c7b39afabd7310722"
+    },
+    {
+      "bytes": 286,
+      "path": "results/raw/equal-marginal-history-counterexample.json",
+      "sha256": "2d9401b0931f0489fba7e7cf130950b79abd3647f121bc9baea951ef5902d6c0"
+    },
+    {
+      "bytes": 556,
+      "path": "results/raw/exact-probability-checks.csv",
+      "sha256": "0e0f667325311e6a90e0150f47f053250ad618d94b67b596f93f424be70b1a61"
+    },
+    {
+      "bytes": 675,
+      "path": "results/raw/finite-attack-harness-summary.json",
+      "sha256": "7308e1382812bebdb4a979b9c3da966a6ee74424e5d0609f6ccce5f794708895"
+    },
+    {
+      "bytes": 3886,
+      "path": "results/raw/finite-attack-harness.csv",
+      "sha256": "cdabe739485fd4000c4715294ea9a2056f5a19516c764ac8ad4f1efeb27dd3ba"
+    },
+    {
+      "bytes": 139,
+      "path": "results/raw/mutation-campaign-summary.json",
+      "sha256": "1266dedf409d7d63f5d345eb255004a39f624051e65ace1078eb9b0925476847"
+    },
+    {
+      "bytes": 1907,
+      "path": "results/raw/mutation-campaign.csv",
+      "sha256": "93ac9e7453a04305cda0c1f28d422aa92c61c054fe4311d8a250a2c5d25dda0b"
+    },
+    {
+      "bytes": 117,
+      "path": "results/raw/negative-control-envelope-deletion.json",
+      "sha256": "08f1c8455eb017706fec4eb897c1380f9d4ecb4ac86a3024eb730aa57b11e37e"
+    },
+    {
+      "bytes": 642,
+      "path": "results/raw/optional-stopping-summary.json",
+      "sha256": "2d9affd0cb161fa4e20aeb2cca5ec896179032fc50e44f4d56cfd1e600a28627"
+    },
+    {
+      "bytes": 5839,
+      "path": "results/raw/prepared-summary.json",
+      "sha256": "92501e3e9c8f7a310d8c26883d6b08ea020d72bf80f77d229b59f7a1ec31a5ae"
+    },
+    {
+      "bytes": 52901,
+      "path": "results/raw/proof-implementation-checks.json",
+      "sha256": "0e87c739c7040ea06c99602f18e789d4de239eaf5a2589cb30c5acaa61586d56"
+    },
+    {
+      "bytes": 5506,
+      "path": "results/raw/residual-subset-timing-samples.csv",
+      "sha256": "199a7a060211649833d5ecacd6dc49cc6c6b10b5db8137bbec88fa4a6d1560ca"
+    },
+    {
+      "bytes": 150,
+      "path": "results/raw/resume-registry-continuity-audit.json",
+      "sha256": "9e140554248e46284fb6390bb3697265d16542afeb1dfc8d94c6ebc3772a6c67"
+    },
+    {
+      "bytes": 24316,
+      "path": "results/raw/run-summary.json",
+      "sha256": "74ed6db27db9a8f0e264878a823dbefc2ada92b3bd244f1f320a26b9544b3156"
+    },
+    {
+      "bytes": 295,
+      "path": "results/raw/safeguard-lattice-summary.json",
+      "sha256": "7049be608317f413529b97aa277dca15a38346316251abe8253e5be015eb72c2"
+    },
+    {
+      "bytes": 42079,
+      "path": "results/raw/safeguard-lattice.csv",
+      "sha256": "49c9a9e980568be180aa7ad4f0a0a5addf7c377db863340832d27ecbff63470a"
+    },
+    {
+      "bytes": 262,
+      "path": "results/raw/terminal-failure-registry-audit.json",
+      "sha256": "4da6cd579cd6e83787e64a14c8252f692c8369769883aeb6d2a180c48b191b14"
+    },
+    {
+      "bytes": 12069,
+      "path": "results/raw/test-output.txt",
+      "sha256": "0f964e979d98307dfdf8337a40d8ff11343fe0929c36266b79b6893785b98b10"
+    },
+    {
+      "bytes": 199,
+      "path": "results/raw/test-summary.json",
+      "sha256": "f79c4dd9ad2f4068f6d3745041e52dfce3a735acf7a1f114a77144b3797cc418"
+    },
+    {
+      "bytes": 652,
+      "path": "results/raw/threshold-audit-summary.json",
+      "sha256": "e742c58aed982b6dac44b172fdd9fc392240126196d20ae3b672ffcdc1ebc9dd"
+    },
+    {
+      "bytes": 14915,
+      "path": "results/raw/threshold-carrier-timing-samples.csv",
+      "sha256": "42545dc638aa61948d6ee46fd438cd623ee6385ce7c27ae34635160b65ba0760"
+    },
+    {
+      "bytes": 1045290,
+      "path": "results/raw/threshold-coalition-cells.csv",
+      "sha256": "af610b62291d99ff7460eea1eaa1578cc77f03b1605ad6397e8e46d5f6c9381a"
+    },
+    {
+      "bytes": 1491,
+      "path": "results/raw/threshold-compiled-gamma.json",
+      "sha256": "a2e75346013f1cc05c4010f8dfd307e51da95af94f93d62037e7d8672e8034e6"
+    },
+    {
+      "bytes": 3186,
+      "path": "results/raw/threshold-deletion-authorization.csv",
+      "sha256": "040b0e11576a8f384f6c91095096604d9312667a9302be90b97d94a1d529431d"
+    },
+    {
+      "bytes": 47436,
+      "path": "results/raw/threshold-shared-key-candidate-cells.csv",
+      "sha256": "7bd6bfe77853628ab4cc622dffcdceaa622067f315d4b7f5fe83e18d03210ff4"
+    },
+    {
+      "bytes": 3817,
+      "path": "results/raw/threshold-single-mutations.csv",
+      "sha256": "4f6523ec7f701d8511d57ffb662c3fb3bd16dc626b4d31854fe4edaaa0fc29ac"
+    },
+    {
+      "bytes": 32612,
+      "path": "run_experiments.py",
+      "sha256": "bea11543e1d80cc4a0eaf29bcc48d533c815a79122071f960f06a1a31df1593e"
+    },
+    {
+      "bytes": 260,
+      "path": "run_experiments_sharded.sh",
+      "sha256": "bce5c10dc3cef6273d233e79a68c78a23e6780b686dceec6cc01ccfcfb787fda"
+    },
+    {
+      "bytes": 24657,
+      "path": "tests/test_contextmark.py",
+      "sha256": "c3a264b2eb0669b62b811d667e79e47e98de93a42f45c92e488fa2f608e63e25"
+    },
+    {
+      "bytes": 6694,
+      "path": "tests/test_security_boundaries.py",
+      "sha256": "8b7456a0ab8c64afbf2ff5141ad35023bbe3455ee7a405945bbdf9b6714ffb25"
+    }
+  ],
+  "entry_count": 66,
+  "schema": "contextmark-run-manifest",
+  "seed": 20260718
+}

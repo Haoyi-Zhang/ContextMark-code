@@ -1,0 +1,202 @@
+{
+  "assurance_checks": {
+    "certificate_saturation_boundary": {
+      "evidence_conditioned_bound": 1.0,
+      "passed": true,
+      "uncapped_certificate": 1.5
+    },
+    "closure_all_passed": true,
+    "closure_count": 128,
+    "envelope_full_artifact_boundary": {
+      "binder_ignores_threshold_field": true,
+      "full_artifact_reader_rejects_noncanonical_float": true
+    },
+    "passed": true,
+    "polynomial_equivalence_mismatches": 0,
+    "product_certificate_counterexample": {
+      "actual_first_hit": 0.0,
+      "actual_hazards": [
+        0.0,
+        0.0
+      ],
+      "product_probability_bound": 0.75,
+      "upper_certificate": 1.0,
+      "upper_hazards": [
+        0.5,
+        0.5
+      ]
+    },
+    "public_verifier_runtime_boundary": {
+      "binder_runtime_rejected": true
+    },
+    "schema": "tdsc-assurance-checks-v2",
+    "small_field_assignments": 4802,
+    "threshold_pair_count": 496,
+    "threshold_pairs_all_passed": true
+  },
+  "benchmark_depths": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048
+  ],
+  "calibration": {
+    "analytic_anytime_upper_bound": 0.05,
+    "anytime_argmax_probability": 0.98,
+    "anytime_max_noncoverage": 0.021475760606010686,
+    "equal_marginal_counterexample": {
+      "calibration_challenge_one_probability": 0.5,
+      "calibration_failure_probability": 0.5,
+      "deployment_challenge_one_probability": 0.5,
+      "deployment_failure_probability": 1.0,
+      "equal_unconditional_challenge_marginal": true,
+      "historywise_conditional_domination_required": true
+    },
+    "family_alpha": 0.05,
+    "fixed_level_argmax_probability": 0.66,
+    "fixed_level_max_noncoverage": 0.1964083811338359,
+    "grid_points": 99,
+    "horizon": 64,
+    "valid": true
+  },
+  "environment": {
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "cryptography": "46.0.4",
+    "gpu_used": false,
+    "human_evidence_used": false,
+    "learned_model_used": false,
+    "logical_cpu_count": 5,
+    "machine": "x86_64",
+    "model_api_used": false,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "private_data_used": false,
+    "python": "3.13.5",
+    "python_implementation": "CPython",
+    "seed": 20260718,
+    "timestamp_utc": "2026-09-26T09:08:41Z"
+  },
+  "exact_probability_m20_elapsed_ms": 960.380159,
+  "exact_probability_max_error": 2.11148373091552e-16,
+  "query_caps": {
+    "collusion": 166,
+    "nontransfer": 2497,
+    "removal": 333,
+    "unforgeability": 999
+  },
+  "schema": "contextmark-prepared-evidence-v2",
+  "structural_campaigns": {
+    "architecture_baseline_success_counts": {
+      "complete": 0,
+      "context_mark_without_parents": 1,
+      "detached_records": 4,
+      "host_bound_owner_mark": 4,
+      "signed_owner_mark": 3
+    },
+    "finite_attack_harness": {
+      "complete_successful_attacks": 0,
+      "evidence_kind": "truth_table_consistency",
+      "independent_interaction_evidence": false,
+      "row_count": 42,
+      "schema": "factorized-truth-table-consistency-v1",
+      "shared_rule": "REQUIRED",
+      "valid": true,
+      "weakened_successes": {
+        "without_collusion_robustness": [
+          "two_copy_cancellation"
+        ],
+        "without_host_binding": [
+          "transplant_trace"
+        ],
+        "without_key_isolation": [
+          "adaptive_key_forgery"
+        ],
+        "without_one_copy_removal": [
+          "delete_trace"
+        ],
+        "without_parent_links": [
+          "parent_free_splice"
+        ],
+        "without_tip_binding": [
+          "replay_under_other_tip"
+        ]
+      }
+    },
+    "mutation_campaign": {
+      "artifact_cases": 10,
+      "case_count": 47,
+      "chain_language_cases": 7,
+      "record_field_cases": 30,
+      "rejected": 47,
+      "valid": true
+    },
+    "negative_control": {
+      "accepted_after_deletion": false,
+      "accepted_before": true,
+      "attack_succeeds": true,
+      "binder_equal": true
+    },
+    "resume_registry_continuity": {
+      "issue_without_registry_rejected": true,
+      "passed": true,
+      "restored_continuation_accepted": true,
+      "resume_without_registry_rejected": true
+    },
+    "safeguard_lattice": {
+      "attack_count": 6,
+      "configuration_count": 64,
+      "evidence_kind": "truth_table_consistency",
+      "independent_interaction_evidence": false,
+      "monotonicity_violations": 0,
+      "row_count": 384,
+      "schema": "factorized-truth-table-consistency-v1",
+      "shared_rule": "REQUIRED",
+      "valid": true
+    },
+    "terminal_failure_registry": {
+      "budget_rejected": true,
+      "calls_after_initial": 1,
+      "calls_after_retry": 1,
+      "initial_failed": true,
+      "passed": true,
+      "restored_backend_calls": 0,
+      "restored_retry_failed": true,
+      "retry_failed": true,
+      "status_counts": [
+        0,
+        1,
+        1
+      ]
+    },
+    "threshold_audit": {
+      "coalition_canonical_selection_mismatches": 0,
+      "coalition_cells": 4352,
+      "coalition_trace_mismatches": 0,
+      "deletion_cases": 32,
+      "passed": true,
+      "shared_key_candidate_set_mismatches": 0,
+      "shared_key_canonical_selection_mismatches": 0,
+      "shared_key_two_group_cells": 256,
+      "single_mutation_cases": 25,
+      "single_mutations_all_still_read": true,
+      "three_contributor_cells": 4096,
+      "trace_contract": "Gamma binds each valid signed tip d_j to its compiler-derived key k_j; Trace_Gamma(Y) is the set of j for which Read_{k_j}(Y)=d_j; a scalar contributor is the lexicographically smallest traced context",
+      "two_contributor_cells": 256
+    }
+  },
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python -m unittest discover -s tests -v",
+    "deterministic_test_count": 89,
+    "failed": 0,
+    "passed": 89,
+    "returncode": 0,
+    "valid": true
+  }
+}

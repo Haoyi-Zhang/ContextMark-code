@@ -1,0 +1,19 @@
+{
+  "analytic_anytime_upper_bound": 0.05,
+  "anytime_argmax_probability": 0.98,
+  "anytime_max_noncoverage": 0.021475760606010686,
+  "equal_marginal_counterexample": {
+    "calibration_challenge_one_probability": 0.5,
+    "calibration_failure_probability": 0.5,
+    "deployment_challenge_one_probability": 0.5,
+    "deployment_failure_probability": 1.0,
+    "equal_unconditional_challenge_marginal": true,
+    "historywise_conditional_domination_required": true
+  },
+  "family_alpha": 0.05,
+  "fixed_level_argmax_probability": 0.66,
+  "fixed_level_max_noncoverage": 0.1964083811338359,
+  "grid_points": 99,
+  "horizon": 64,
+  "valid": true
+}

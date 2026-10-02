@@ -1,0 +1,57 @@
+{
+  "schema": "tdsc-official-rule-lock",
+  "checked_utc": "2026-09-24T08:36:48Z",
+  "status": "CURRENT_RULES_RECORDED; LIVE_PORTAL_RECHECK_REQUIRED_BEFORE_SUBMISSION",
+  "venue": "IEEE Transactions on Dependable and Secure Computing",
+  "article_type": "regular research article",
+  "scope": "system-level dependability and security through design, modeling, verification, measurement, simulation, and evaluation; pure theoretical cryptography without a clear system application is outside scope",
+  "review_model": "single anonymous; TDSC does not offer double-anonymous review",
+  "template": {
+    "class": "paper/IEEEtran.cls",
+    "bibliography_style": "paper/IEEEtran.bst",
+    "page_size": "US Letter",
+    "main_options": "letterpaper,journal",
+    "supplement_options": "letterpaper,journal,onecolumn"
+  },
+  "abstract": {
+    "range_words": [
+      100,
+      200
+    ],
+    "references_allowed": false,
+    "mathematical_expressions_allowed": false
+  },
+  "authors": {
+    "planned_slots": 6,
+    "identified": 3,
+    "blank_slots": [
+      4,
+      5,
+      6
+    ],
+    "submission_blocked_until_complete": true
+  },
+  "biographies": {
+    "required_initially": false,
+    "included": false
+  },
+  "supplement": {
+    "separate_upload": true
+  },
+  "length": {
+    "general_transactions_baseline_pages": 12,
+    "current_main_pages": 14,
+    "overlength_candidate": true,
+    "live_rule_recheck_required": true
+  },
+  "ai_disclosure": {
+    "required_for_current_workflow": true,
+    "included_in_acknowledgment": true,
+    "author_approval_required": true
+  },
+  "official_sources": [
+    "https://www.computer.org/publications/author-resources",
+    "https://www.computer.org/digital-library/journals/tq/cfp-dependable-secure-computing",
+    "https://journals.ieeeauthorcenter.ieee.org/become-an-ieee-journal-author/publishing-ethics/guidelines-and-policies/submission-and-peer-review-policies/"
+  ]
+}
