@@ -21,7 +21,7 @@ PYTHONDONTWRITEBYTECODE=1 python artifact/verify_release.py --root .
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python verify_release.py --root .
 ```
 
-The full-package command checks paper, references, authorship metadata, release manifest, execution manifest, and tests. The standalone command checks only artifact execution evidence and tests. Neither command copies coordination/history files into the selected root, and neither constitutes independent scientific review.
+The full-package command checks paper, references, authorship metadata, release manifest, execution manifest, and tests. The standalone command checks only artifact execution evidence and tests.
 
 ## Evidence interpretation
 
