@@ -16,4 +16,4 @@ The actual authors must jointly confirm, outside this artifact:
 - the corresponding author;
 - whether the phantom row should remain or be removed.
 
-Until that confirmation is documented, the package is not submission-ready. No person was contacted and no name or contribution was invented during this repair.
+Author order and the disposition of the reserved slots remain to be confirmed.
