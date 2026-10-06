@@ -2,12 +2,12 @@
 """Predeclared CPU-only evidence driver for TDSC-01."""
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import json
 import os
 import platform
-import shutil
 import statistics
 import subprocess
 import sys
@@ -52,11 +52,12 @@ from contextmark.threshold_backend import (
 )
 
 ROOT = Path(__file__).resolve().parent
-RAW = ROOT / "results" / "raw"
-DERIVED = ROOT / "results" / "derived"
+OUTPUT = ROOT / "reproduced"
+RAW = OUTPUT / "raw"
+DERIVED = OUTPUT / "derived"
 SEED = 20260718
 GAMES = ("removal", "nontransfer", "unforgeability", "collusion")
-EXPECTED_TESTS = 89
+EXPECTED_TESTS = 101
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -94,14 +95,16 @@ def sha256_file(path: Path) -> str:
 
 
 def run_tests() -> dict[str, Any]:
-    command = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]
+    command = [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests", "-v"]
     completed = subprocess.run(
         command,
         cwd=ROOT,
-        env={**os.environ, "PYTHONPATH": str(ROOT), "PYTHONDONTWRITEBYTECODE": "1"},
+        env={**os.environ, "PYTHONPATH": str(ROOT) + os.pathsep + os.environ.get("PYTHONPATH", ""),
+             "PYTHONDONTWRITEBYTECODE": "1", "PYTHONUTF8": "1"},
         capture_output=True,
         text=True,
         check=False,
+        timeout=180,
     )
     output = completed.stdout + completed.stderr
     (RAW / "test-output.txt").write_text(output, encoding="utf-8")
@@ -628,18 +631,20 @@ def build_run_manifest() -> dict[str, Any]:
     paths = [ROOT / "requirements.txt", ROOT / "run_experiments.py", ROOT / "run_experiments_sharded.sh"]
     paths.extend((ROOT / "contextmark").glob("*.py"))
     paths.extend((ROOT / "tests").glob("*.py"))
-    paths.extend(path for path in (ROOT / "results").rglob("*") if path.is_file() and path != manifest_path)
+    paths.extend(path for path in OUTPUT.rglob("*") if path.is_file() and path != manifest_path)
     entries = []
-    for path in sorted(set(paths), key=lambda p: p.relative_to(ROOT).as_posix()):
+    for path in sorted(set(paths), key=lambda p: p.as_posix()):
+        base = OUTPUT if path.is_relative_to(OUTPUT) else ROOT
         entries.append({
-            "path": path.relative_to(ROOT).as_posix(),
+            "base": "output" if base == OUTPUT else "artifact",
+            "path": path.relative_to(base).as_posix(),
             "bytes": path.stat().st_size,
             "sha256": sha256_file(path),
         })
     manifest = {
-        "schema": "contextmark-run-manifest",
+        "schema": "contextmark-run-manifest-v2",
         "seed": SEED,
-        "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. sh run_experiments_sharded.sh",
+        "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONUTF8=1 sh run_experiments_sharded.sh OUTPUT",
         "entry_count": len(entries),
         "entries": entries,
     }
@@ -648,10 +653,10 @@ def build_run_manifest() -> dict[str, Any]:
 
 
 def prepare_experiments() -> dict[str, Any]:
+    if OUTPUT.exists() and any(OUTPUT.iterdir()):
+        raise RuntimeError("output must be absent or empty; retained evidence is never deleted")
     for directory in (RAW, DERIVED):
-        if directory.exists():
-            shutil.rmtree(directory)
-        directory.mkdir(parents=True)
+        directory.mkdir(parents=True, exist_ok=True)
     environment = environment_record()
     write_json(RAW / "environment.json", environment)
     tests = run_tests()
@@ -718,20 +723,32 @@ def main() -> int:
 
 
 def dispatch() -> int:
-    if len(sys.argv) == 1:
+    global OUTPUT, RAW, DERIVED
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", type=Path, default=OUTPUT, help="fresh output directory (default: reproduced)")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--prepare", action="store_true")
+    mode.add_argument("--benchmark-depth", type=int)
+    mode.add_argument("--finalize", action="store_true")
+    args = parser.parse_args()
+    OUTPUT = args.out.expanduser().resolve()
+    if OUTPUT == ROOT or OUTPUT in ROOT.parents or OUTPUT == ROOT / "results" or (ROOT / "results") in OUTPUT.parents:
+        raise RuntimeError("output cannot be the source tree, its ancestor, or retained historical results")
+    RAW, DERIVED = OUTPUT / "raw", OUTPUT / "derived"
+    if not args.prepare and args.benchmark_depth is None and not args.finalize:
         return main()
-    if sys.argv[1:] == ["--prepare"]:
+    if args.prepare:
         prepare_experiments()
         return 0
-    if len(sys.argv) == 3 and sys.argv[1] == "--benchmark-depth":
-        depth = int(sys.argv[2])
+    if args.benchmark_depth is not None:
+        depth = args.benchmark_depth
         shard = run_compiler_benchmark_depth(depth)
         print(json.dumps({"depth": depth, "row": shard["row"]}, indent=2, sort_keys=True))
         return 0
-    if sys.argv[1:] == ["--finalize"]:
+    if args.finalize:
         finalize_experiments()
         return 0
-    raise SystemExit("usage: run_experiments.py [--prepare | --benchmark-depth N | --finalize]")
+    return 0
 
 
 if __name__ == "__main__":

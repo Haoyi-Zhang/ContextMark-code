@@ -33,11 +33,20 @@ def _validate_probability(value: float, name: str) -> None:
         raise ValueError(f"{name} must be a finite probability in [0,1]")
 
 
-def theorem_bound(game: str, q: int, n: int, rates: PrimitiveRates, *, coalition_groups: int | None = None) -> float:
-    if q < 0 or n < 0:
-        raise ValueError("q and n must be nonnegative")
+def _validate_count(value: int, name: str) -> None:
+    if type(value) is not int or value < 0:
+        raise ValueError(f"{name} must be a nonnegative integer")
+
+
+def _validate_rates(rates: PrimitiveRates) -> None:
     for name, value in rates.as_dict().items():
         _validate_probability(value, name)
+
+
+def theorem_bound(game: str, q: int, n: int, rates: PrimitiveRates, *, coalition_groups: int | None = None) -> float:
+    _validate_count(q, "q")
+    _validate_count(n, "n")
+    _validate_rates(rates)
     chain = n * (rates.eps_sig + rates.eps_hash)
     if game == "removal":
         raw = rates.eps_prf + q * (rates.eps_rm + rates.delta_stab)
@@ -47,8 +56,7 @@ def theorem_bound(game: str, q: int, n: int, rates: PrimitiveRates, *, coalition
         raw = rates.eps_prf + chain + q * rates.eps_uf
     elif game == "collusion":
         groups = q if coalition_groups is None else coalition_groups
-        if groups < 0:
-            raise ValueError("coalition group count must be nonnegative")
+        _validate_count(groups, "coalition_groups")
         raw = rates.eps_prf + groups * rates.eps_col + groups * rates.delta_stab
     else:
         raise ValueError(f"unknown game: {game}")
@@ -141,6 +149,9 @@ def enumerate_union_probability(probabilities: list[float]) -> tuple[float, int,
 
 
 def independent_model(game: str, q: int, n: int, rates: PrimitiveRates) -> float:
+    _validate_count(q, "q")
+    _validate_count(n, "n")
+    _validate_rates(rates)
     probabilities: list[float] = [rates.eps_prf]
     if game == "removal":
         probabilities.extend([rates.eps_rm, rates.delta_stab] * q)
@@ -158,8 +169,9 @@ def independent_model(game: str, q: int, n: int, rates: PrimitiveRates) -> float
 
 
 def query_caps(alpha: float, tau: float, rates: PrimitiveRates) -> dict[str, int | None]:
-    if alpha < 0:
-        raise ValueError("alpha must be nonnegative")
+    if not math.isfinite(alpha) or alpha < 0:
+        raise ValueError("alpha must be finite and nonnegative")
+    _validate_rates(rates)
     _validate_probability(tau, "tau")
     if tau <= rates.eps_prf:
         raise ValueError("target probability must exceed the key-switch loss")

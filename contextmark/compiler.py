@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import json
 import threading
 from copy import deepcopy
 from dataclasses import dataclass
@@ -229,16 +230,19 @@ class ContextMarkCompiler:
             "metadata": deepcopy(dict(metadata or {})),
         }
         context = self._context_digest(unsigned)
+        request_id = self._request_identifier(unsigned, request_program)
+        return request_program, unsigned, context, request_id
+
+    def _request_identifier(self, unsigned: Mapping[str, Any], request_program: bytes) -> str:
         request_material = {
-            "parent": parent,
-            "actor": actor,
-            "operation": operation,
+            "parent": unsigned["parent"],
+            "actor": unsigned["actor"],
+            "operation": unsigned["operation"],
             "metadata": unsigned["metadata"],
             "binder": unsigned["binder"],
             "program_sha256": hashlib.sha256(request_program).hexdigest(),
         }
-        request_id = hashlib.sha256(self._REQUEST_DOMAIN + canonical_bytes(request_material)).hexdigest()
-        return request_program, unsigned, context, request_id
+        return hashlib.sha256(self._REQUEST_DOMAIN + canonical_bytes(request_material)).hexdigest()
 
     def _terminal_response(self, request_id: str, request_program: bytes, unsigned: dict[str, Any], context: str):
         state = self._requests.get(request_id)
@@ -471,6 +475,14 @@ class ContextMarkCompiler:
             return {**unsigned, "tag": self._registry_tag(unsigned)}
 
     def restore_registry_snapshot(self, snapshot: Mapping[str, Any]) -> None:
+        try:
+            self._restore_registry_snapshot(snapshot)
+        except ContextMarkError:
+            raise
+        except (CanonicalizationError, KeyError, TypeError, ValueError, RecursionError, RuntimeError) as exc:
+            raise ContextMarkError(f"registry snapshot validation failed: {exc}") from exc
+
+    def _restore_registry_snapshot(self, snapshot: Mapping[str, Any]) -> None:
         required = {
             "version", "chain_id", "entry_count", "attempted_context_count",
             "attempted_contexts", "entries", "tag",
@@ -486,7 +498,8 @@ class ContextMarkCompiler:
         entries, attempted = unsigned["entries"], unsigned["attempted_contexts"]
         if not isinstance(entries, list) or not isinstance(attempted, list):
             raise ContextMarkError("registry snapshot arrays are malformed")
-        if unsigned["entry_count"] != len(entries) or unsigned["attempted_context_count"] != len(attempted):
+        if (type(unsigned["entry_count"]) is not int or type(unsigned["attempted_context_count"]) is not int
+                or unsigned["entry_count"] != len(entries) or unsigned["attempted_context_count"] != len(attempted)):
             raise ContextMarkError("registry snapshot count mismatch")
         if attempted != sorted(set(attempted)):
             raise ContextMarkError("attempted-context index is not canonical")
@@ -525,8 +538,27 @@ class ContextMarkCompiler:
                 raise ContextMarkError("registry request state is malformed")
             try:
                 program_bytes = bytes.fromhex(program_hex)
+                program = json.loads(program_bytes)
             except ValueError as exc:
                 raise ContextMarkError("registry program encoding is malformed") from exc
+            if program_bytes.hex() != program_hex or canonical_bytes(program) != program_bytes or not isinstance(program, dict):
+                raise ContextMarkError("registry request program is not canonical")
+            if set(unsigned_record) != RECORD_FIELDS - {"context", "signature"}:
+                raise ContextMarkError("registry unsigned record has an invalid field set")
+            index, parent = unsigned_record["index"], unsigned_record["parent"]
+            if type(index) is not int or not 0 <= index < self.max_records:
+                raise ContextMarkError("registry record index is invalid")
+            if not isinstance(parent, str) or ((index == 0) != (parent == GENESIS)):
+                raise ContextMarkError("registry genesis/parent relation is invalid")
+            if (unsigned_record["version"] != RECORD_VERSION or unsigned_record["chain_id"] != self.chain_id
+                    or unsigned_record["actor"] not in self.actor_public_keys
+                    or not isinstance(unsigned_record["operation"], str) or not unsigned_record["operation"]
+                    or not isinstance(unsigned_record["metadata"], dict)):
+                raise ContextMarkError("registry request language is invalid")
+            if self.binder(program) != unsigned_record["binder"]:
+                raise ContextMarkError("registry request binder does not match its program")
+            if self._request_identifier(unsigned_record, program_bytes) != request_id:
+                raise ContextMarkError("registry request identifier does not match its request")
             if self._context_digest(unsigned_record) != context:
                 raise ContextMarkError("registry context does not match its unsigned record")
             if status == "success":
@@ -535,12 +567,14 @@ class ContextMarkCompiler:
                 }:
                     raise ContextMarkError("successful registry entry has an invalid field set")
                 record, artifact = entry["record"], entry["artifact"]
-                self._verify_record(record, index=int(unsigned_record["index"]), parent=str(unsigned_record["parent"]))
+                if self._unsigned(record) != unsigned_record or record["context"] != context:
+                    raise ContextMarkError("registry record does not match its request")
+                self._verify_record(record, index=index, parent=parent)
                 key = self.derive_watermark_key(context)
                 if self.binder(artifact) != unsigned_record["binder"] or self.backend.read(key, artifact) != context:
                     raise ContextMarkError("successful registry artifact is not accepted")
                 issued[context] = (
-                    program_bytes, int(unsigned_record["index"]), str(unsigned_record["parent"]),
+                    program_bytes, index, parent,
                     deepcopy(record), deepcopy(artifact),
                 )
             else:
@@ -548,9 +582,17 @@ class ContextMarkCompiler:
                     "status", "request_program_hex", "unsigned", "context", "failure_code"
                 }:
                     raise ContextMarkError("failed registry entry has an invalid field set")
+                if not isinstance(entry["failure_code"], str) or not entry["failure_code"]:
+                    raise ContextMarkError("registry failure code is invalid")
             requests[request_id] = deepcopy(entry)
         if set(context_owner) != set(attempted):
             raise ContextMarkError("attempted-context index contains a missing or extra context")
+        # A closed terminal transcript includes the successful predecessor of
+        # every non-genesis attempt, including failed attempts after a tip.
+        for entry in requests.values():
+            index, parent = entry["unsigned"]["index"], entry["unsigned"]["parent"]
+            if index and (parent not in issued or issued[parent][1] != index - 1):
+                raise ContextMarkError("registry request is missing a successful predecessor")
         with self._registry_lock:
             if self._requests or self._attempted_contexts:
                 raise ContextMarkError("registry restore requires an empty compiler")

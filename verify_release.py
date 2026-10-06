@@ -30,7 +30,7 @@ import sys
 from typing import Any
 
 DEFAULT_PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_TESTS = 89
+EXPECTED_TESTS = 101
 
 
 def require(condition: bool, message: str) -> None:
@@ -72,13 +72,21 @@ def classify_root(root: Path) -> tuple[str, Path, Path | None]:
     )
 
 
-def verify_execution_manifest(artifact_root: Path) -> dict[str, Any]:
-    path = artifact_root / "results/raw/run-manifest.json"
+def verify_execution_manifest(artifact_root: Path, evidence_dir: Path | None = None) -> dict[str, Any]:
+    evidence_dir = (evidence_dir or artifact_root / "results").resolve()
+    path = evidence_dir / "raw/run-manifest.json"
     require(path.is_file(), "missing execution run manifest")
     execution = json.loads(path.read_text(encoding="utf-8"))
+    require(execution.get("entry_count") == len(execution["entries"]), "execution entry count mismatch")
     for row in execution["entries"]:
-        target = (artifact_root / row["path"]).resolve()
-        require(target.is_relative_to(artifact_root.resolve()), "execution path escape")
+        if execution.get("schema") == "contextmark-run-manifest-v2":
+            require(row.get("base") in {"artifact", "output"}, "invalid execution base")
+            base = artifact_root.resolve() if row["base"] == "artifact" else evidence_dir
+        else:
+            require(execution.get("schema") == "contextmark-run-manifest", "unknown execution manifest schema")
+            base = artifact_root.resolve()
+        target = (base / row["path"]).resolve()
+        require(target.is_relative_to(base), "execution path escape")
         require(target.is_file(), f"missing execution evidence: {row['path']}")
         require(sha(target) == row["sha256"], f"execution evidence changed: {row['path']}")
     return execution
@@ -136,19 +144,21 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=DEFAULT_PROJECT_ROOT)
     parser.add_argument("--skip-tests", action="store_true")
+    parser.add_argument("--evidence-dir", type=Path, help="current reproduction output; default: retained results")
     args = parser.parse_args()
     root = args.root.expanduser().resolve()
     require(root.is_dir(), f"root is not a directory: {root}")
     mode, artifact_root, project_root = classify_root(root)
     before = records(root)
-    execution = verify_execution_manifest(artifact_root)
+    execution = verify_execution_manifest(artifact_root, args.evidence_dir)
     full = verify_full_package(project_root) if project_root is not None else None
 
     test_result = "skipped by explicit flag"
     if not args.skip_tests:
-        env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONPATH=".")
+        env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1",
+                   PYTHONPATH=str(artifact_root) + os.pathsep + os.environ.get("PYTHONPATH", ""))
         proc = subprocess.run(
-            [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-q"],
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests", "-q"],
             cwd=artifact_root,
             env=env,
             text=True,
