@@ -33,6 +33,14 @@ The `scientific-checks.yml` workflow targets a flat artifact repository on Ubunt
 
 ## Evidence interpretation
 
+The portable restore regression runs with `python -B -m unittest discover -s tests -p test_restore_membership.py -v`.
+It uses owned in-memory envelope and threshold fixtures, an independent
+list-scan transcript projection, complete terminal retries and re-exported
+states, and matched session/stateless requests. Restore reuses the local set
+already needed to validate the ordered attempted-context index; canonical
+order, authentication, request binding, ancestry and atomic installation are
+unchanged. This regression does not run a campaign or measure performance.
+
 - The 42 rows, 384 cells, and five architecture names are truth-table views of the same `REQUIRED` map, not independent mechanism interactions.
 - The 256 same-key cells test `read_candidates` and canonical scalar selection.
 - The 4,352 compiled coalition cells use valid signed tips, distinct context-derived keys, exact tip payloads, expected trace sets, and a canonical contributor.

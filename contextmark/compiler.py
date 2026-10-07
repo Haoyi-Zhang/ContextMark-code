@@ -501,7 +501,8 @@ class ContextMarkCompiler:
         if (type(unsigned["entry_count"]) is not int or type(unsigned["attempted_context_count"]) is not int
                 or unsigned["entry_count"] != len(entries) or unsigned["attempted_context_count"] != len(attempted)):
             raise ContextMarkError("registry snapshot count mismatch")
-        if attempted != sorted(set(attempted)):
+        attempted_set = set(attempted)
+        if attempted != sorted(attempted_set):
             raise ContextMarkError("attempted-context index is not canonical")
         if len(attempted) > self.max_contexts:
             raise ContextMarkError("registry snapshot exceeds the terminal attempt budget")
@@ -527,7 +528,7 @@ class ContextMarkCompiler:
             if status not in {"success", "failed"}:
                 raise ContextMarkError("registry entry has a nonterminal status")
             context = entry.get("context")
-            if not isinstance(context, str) or context not in attempted:
+            if not isinstance(context, str) or context not in attempted_set:
                 raise ContextMarkError("registry entry is absent from the attempted-context index")
             if context in context_owner:
                 raise ContextMarkError("registry context is owned by multiple requests")
@@ -585,7 +586,7 @@ class ContextMarkCompiler:
                 if not isinstance(entry["failure_code"], str) or not entry["failure_code"]:
                     raise ContextMarkError("registry failure code is invalid")
             requests[request_id] = deepcopy(entry)
-        if set(context_owner) != set(attempted):
+        if set(context_owner) != attempted_set:
             raise ContextMarkError("attempted-context index contains a missing or extra context")
         # A closed terminal transcript includes the successful predecessor of
         # every non-genesis attempt, including failed attempts after a tip.
@@ -599,7 +600,7 @@ class ContextMarkCompiler:
             self._requests = requests
             self._context_owner = context_owner
             self._issued = issued
-            self._attempted_contexts = set(attempted)
+            self._attempted_contexts = attempted_set
 
     def begin_session(
         self,
