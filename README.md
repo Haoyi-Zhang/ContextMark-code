@@ -1,6 +1,18 @@
-# TDSC-01 executable artifact
+# ContextMark
 
 The artifact checks implementation correspondence for the context-bound lineage compiler, finite threshold carrier, predictable risk bounds, recovery discipline, and the repaired multi-context trace contract. It is not a production watermark or proof-assistant development.
+
+## Figures
+
+`reporting/draw_security.py` reads the four retained security CSVs and produces
+the two editable-source vector plots. It requires matplotlib 3.10.8, numpy
+2.3.5, fontTools, and an installed embeddable Times-compatible TrueType family.
+It prefers TeX Gyre Termes, then Times New Roman, then Liberation Serif; it does
+not install or redistribute font files. Run it from this repository with
+`python reporting/draw_security.py`; use `--outdir` to select an output folder.
+The full paper/artifact packet's figure wrapper uses the same renderer, so
+plot data, axes and styles have one source. No security experiment is rerun by
+this drawing command.
 
 ## Run
 
