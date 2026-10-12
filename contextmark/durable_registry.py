@@ -136,8 +136,11 @@ class DurableRegistry:
             self._write_header(count, header["revision"] + 1)
             self.connection.execute("COMMIT")
         except Exception as exc:
-            if self.connection.in_transaction:
-                self.connection.execute("ROLLBACK")
+            try:
+                if self.connection.in_transaction:
+                    self.connection.execute("ROLLBACK")
+            except Exception as rollback_exc:
+                raise DurableRegistryError("durable registry rollback failed; reopen before issuing") from rollback_exc
             raise DurableRegistryError("durable registry commit failed; reopen before issuing") from exc
 
     def close(self):

@@ -57,7 +57,7 @@ RAW = OUTPUT / "raw"
 DERIVED = OUTPUT / "derived"
 SEED = 20260718
 GAMES = ("removal", "nontransfer", "unforgeability", "collusion")
-EXPECTED_TESTS = 127
+EXPECTED_TESTS = 128
 
 
 def write_json(path: Path, value: Any) -> None:

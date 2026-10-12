@@ -17,7 +17,7 @@ from unittest.mock import patch
 
 from contextmark.canonical import canonical_bytes
 from contextmark.compiler import ContextMarkCompiler, ContextMarkError, MarkingError, make_demo_program
-from contextmark.durable_registry import DurableRegistryError
+from contextmark.durable_registry import DurableRegistry, DurableRegistryError
 from owned_durable_fixture import ARTIFACT_ROOT, WORK_ROOT, OwnedStubBackend, compiler, request
 
 
@@ -212,6 +212,67 @@ class DurableRegistryTests(unittest.TestCase):
         with self.assertRaisesRegex(ContextMarkError, "storage uncertain"):
             c.export_registry_snapshot()
         self.assertEqual(b.calls, 0)
+
+    def test_driver_transaction_errors_stop_issuer_and_preserve_state(self):
+        class OwnedDriver:
+            def __init__(self, rollback_fails):
+                self.rollback_fails = rollback_fails
+                self.in_transaction = False
+                self.rollback_calls = 0
+
+            def execute(self, sql, *parameters):
+                if sql == "BEGIN IMMEDIATE":
+                    self.in_transaction = True
+                elif sql == "COMMIT":
+                    raise sqlite3.OperationalError("owned commit I/O fault")
+                elif sql == "ROLLBACK":
+                    self.rollback_calls += 1
+                    if self.rollback_fails:
+                        raise sqlite3.OperationalError("owned rollback I/O fault")
+                    self.in_transaction = False
+                return self
+
+            def close(self):
+                self.in_transaction = False
+
+        for rollback_fails in (False, True):
+            with self.subTest(rollback_fails=rollback_fails):
+                c = ContextMarkCompiler.deterministic(["builder"], backend=OwnedStubBackend())
+                pair = c.issue([], make_demo_program(2), actor="builder", operation="owned-build")
+                saved_requests = deepcopy(c._requests)
+                saved_snapshot = c.export_registry_snapshot()
+                program, unsigned, context, request_id = c._prepare_request(
+                    pair[0], pair[1], actor="builder", operation="owned-package", metadata=None)
+                entry = dict(request_id=request_id, status="pending", request_program_hex=program.hex(),
+                             unsigned=unsigned, context=context)
+                store = DurableRegistry.__new__(DurableRegistry)
+                store.connection = OwnedDriver(rollback_fails)
+                store.key, store.chain_id = c.master_key, c.chain_id
+                store.owner, store.locked = None, False
+                store._header = lambda: {"entry_count": 1, "revision": 2}
+                c._durable = store
+                try:
+                    with self.assertRaises(ContextMarkError) as raised:
+                        c._persist([entry], reserve=True)
+                    wrapped = raised.exception.__cause__
+                    self.assertIsInstance(wrapped, DurableRegistryError)
+                    self.assertIsInstance(wrapped.__cause__, sqlite3.OperationalError)
+                    expected_fault = "owned rollback I/O fault" if rollback_fails else "owned commit I/O fault"
+                    self.assertEqual(str(wrapped.__cause__), expected_fault)
+                    if rollback_fails:
+                        self.assertEqual(str(wrapped.__cause__.__context__), "owned commit I/O fault")
+                    self.assertEqual(store.connection.rollback_calls, 1)
+                    self.assertTrue(c._storage_failed)
+                    self.assertEqual(c._requests, saved_requests)
+                    self.assertEqual(c.registry_status_counts(), (1, 0, 1))
+                    self.assertTrue(c.verify(*pair))
+                    self.assertEqual(saved_snapshot["entries"][0]["record"], pair[0][0])
+                    with self.assertRaisesRegex(ContextMarkError, "storage uncertain"):
+                        c._ensure_issuance_open()
+                    with self.assertRaisesRegex(ContextMarkError, "storage uncertain"):
+                        c.export_registry_snapshot()
+                finally:
+                    c.close()
 
     def test_terminal_write_error_never_releases_and_restart_does_not_retry(self):
         b = OwnedStubBackend()
