@@ -13,6 +13,7 @@ from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 
 from .canonical import CanonicalizationError, canonical_bytes, expression_binder
+from .durable_registry import DurableRegistry, DurableRegistryError
 
 RECORD_VERSION = "contextmark-record-v1"
 GENESIS = "GENESIS"
@@ -131,6 +132,7 @@ class ContextMarkCompiler:
         backend: WatermarkBackend | None = None,
         max_records: int = 4096,
         max_contexts: int = 16384,
+        registry_path: str | None = None,
     ) -> None:
         if len(master_key) < 32:
             raise ContextMarkError("master key must contain at least 32 bytes")
@@ -149,6 +151,31 @@ class ContextMarkCompiler:
         self._context_owner: dict[str, str] = {}
         self._issued: dict[str, tuple[bytes, int, str, dict[str, Any], dict[str, Any]]] = {}
         self._attempted_contexts: set[str] = set()
+        self._durable: DurableRegistry | None = None
+        self._closed = False
+        self._storage_failed = False
+        if registry_path is not None:
+            try:
+                self._durable = DurableRegistry(registry_path, master_key=self.master_key, chain_id=self.chain_id)
+                entries = self._durable.load_entries()
+                interrupted = []
+                for entry in entries:
+                    if entry.get("status") == "pending":
+                        if set(entry) != {"request_id", "status", "request_program_hex", "unsigned", "context"}:
+                            raise ContextMarkError("pending registry entry has an invalid field set")
+                        entry.update(status="failed", failure_code="InterruptedAttempt")
+                        interrupted.append(entry)
+                # Reuse full request/signature/binder/ancestry validation. No
+                # backend mark occurs during restoration or crash recovery.
+                snapshot = self._snapshot_from_entries(entries)
+                self._restore_registry_snapshot(snapshot, _from_durable=True)
+                if interrupted:
+                    self._durable.write_entries(interrupted)
+            except Exception as exc:
+                if self._durable is not None:
+                    self._durable.close()
+                self._closed = True
+                raise ContextMarkError("durable registry recovery failed") from exc
 
     @classmethod
     def deterministic(
@@ -161,6 +188,7 @@ class ContextMarkCompiler:
         backend: WatermarkBackend | None = None,
         max_records: int = 4096,
         max_contexts: int = 16384,
+        registry_path: str | None = None,
     ) -> "ContextMarkCompiler":
         private: dict[str, Ed25519PrivateKey] = {}
         public: dict[str, Ed25519PublicKey] = {}
@@ -179,7 +207,39 @@ class ContextMarkCompiler:
             backend=backend,
             max_records=max_records,
             max_contexts=max_contexts,
+            registry_path=registry_path,
         )
+
+    def _ensure_issuance_open(self) -> None:
+        if self._closed or self._storage_failed:
+            raise ContextMarkError("issuer closed or storage uncertain; reopen durable state")
+
+    def _persist(self, entries, *, reserve=False) -> None:
+        self._ensure_issuance_open()
+        if self._durable is None:
+            return
+        try:
+            self._durable.write_entries(entries, reserve=reserve)
+        except DurableRegistryError as exc:
+            # A commit exception can have an uncertain outcome. Neither release
+            # nor another backend call is allowed until a new owner reloads it.
+            self._storage_failed = True
+            raise ContextMarkError("durable registry write failed; issuer stopped") from exc
+
+    def close(self) -> None:
+        with self._registry_lock:
+            if any(state["status"] == "pending" for state in self._requests.values()) and not self._storage_failed:
+                raise ContextMarkError("cannot close while a backend attempt is pending")
+            if self._durable is not None:
+                self._durable.close()
+            self._closed = True
+
+    def __enter__(self):
+        self._ensure_issuance_open()
+        return self
+
+    def __exit__(self, *_exc):
+        self.close()
 
     @staticmethod
     def _unsigned(record: Mapping[str, Any]) -> dict[str, Any]:
@@ -275,6 +335,7 @@ class ContextMarkCompiler:
             raise ContextMarkError(f"request construction failed: {exc}") from exc
 
         with self._registry_lock:
+            self._ensure_issuance_open()
             existing = self._terminal_response(request_id, request_program, unsigned, context)
             if existing is not None:
                 chain, artifact = existing
@@ -284,18 +345,23 @@ class ContextMarkCompiler:
                 raise ContextMarkError("context digest is already bound to another logical request")
             if context not in self._attempted_contexts and len(self._attempted_contexts) >= self.max_contexts:
                 raise ContextMarkError("terminal attempt budget exceeded")
-            self._attempted_contexts.add(context)
-            self._context_owner[context] = request_id
-            self._requests[request_id] = {
+            pending = {
                 "status": "pending",
                 "request_program_hex": request_program.hex(),
                 "unsigned": deepcopy(unsigned),
                 "context": context,
             }
+            self._persist([{"request_id": request_id, **pending}], reserve=True)
+            self._attempted_contexts.add(context)
+            self._context_owner[context] = request_id
+            self._requests[request_id] = pending
 
-        key = self.derive_watermark_key(context)
         try:
-            artifact = self.backend.mark(key, deepcopy(program), context)
+            key = self.derive_watermark_key(context)
+            artifact = self.backend.mark(key, json.loads(request_program), context)
+            if not isinstance(artifact, dict):
+                raise MarkingError("backend artifact must be an object")
+            canonical_bytes(artifact)
             if self.binder(artifact) != unsigned["binder"]:
                 raise MarkingError("backend is not binder transparent")
             if self.backend.read(key, artifact) != context:
@@ -305,15 +371,17 @@ class ContextMarkCompiler:
         except Exception as exc:
             failure_code = exc.__class__.__name__
             with self._registry_lock:
-                self._requests[request_id].update({"status": "failed", "failure_code": failure_code})
+                failed = {**pending, "status": "failed", "failure_code": failure_code}
+                self._persist([{"request_id": request_id, **failed}])
+                self._requests[request_id] = failed
             if isinstance(exc, MarkingError):
                 raise
             raise MarkingError(f"backend failed: {failure_code}") from exc
 
         with self._registry_lock:
-            self._requests[request_id].update({
-                "status": "success", "record": deepcopy(record), "artifact": deepcopy(artifact)
-            })
+            success = {**pending, "status": "success", "record": deepcopy(record), "artifact": deepcopy(artifact)}
+            self._persist([{"request_id": request_id, **success}])
+            self._requests[request_id] = success
             self._issued[context] = (
                 request_program,
                 int(unsigned["index"]),
@@ -458,21 +526,25 @@ class ContextMarkCompiler:
 
     def export_registry_snapshot(self) -> dict[str, Any]:
         with self._registry_lock:
+            self._ensure_issuance_open()
             entries = []
             for request_id in sorted(self._requests):
                 state = deepcopy(self._requests[request_id])
                 if state["status"] == "pending":
                     raise ContextMarkError("cannot snapshot an in-progress request")
                 entries.append({"request_id": request_id, **state})
-            unsigned = {
-                "version": self._REGISTRY_VERSION,
-                "chain_id": self.chain_id,
-                "entry_count": len(entries),
-                "attempted_context_count": len(self._attempted_contexts),
-                "attempted_contexts": sorted(self._attempted_contexts),
-                "entries": entries,
-            }
-            return {**unsigned, "tag": self._registry_tag(unsigned)}
+            return self._snapshot_from_entries(entries)
+
+    def _snapshot_from_entries(self, entries) -> dict[str, Any]:
+        unsigned = {
+            "version": self._REGISTRY_VERSION,
+            "chain_id": self.chain_id,
+            "entry_count": len(entries),
+            "attempted_context_count": len(entries),
+            "attempted_contexts": sorted(entry["context"] for entry in entries),
+            "entries": entries,
+        }
+        return {**unsigned, "tag": self._registry_tag(unsigned)}
 
     def restore_registry_snapshot(self, snapshot: Mapping[str, Any]) -> None:
         try:
@@ -482,7 +554,7 @@ class ContextMarkCompiler:
         except (CanonicalizationError, KeyError, TypeError, ValueError, RecursionError, RuntimeError) as exc:
             raise ContextMarkError(f"registry snapshot validation failed: {exc}") from exc
 
-    def _restore_registry_snapshot(self, snapshot: Mapping[str, Any]) -> None:
+    def _restore_registry_snapshot(self, snapshot: Mapping[str, Any], *, _from_durable=False) -> None:
         required = {
             "version", "chain_id", "entry_count", "attempted_context_count",
             "attempted_contexts", "entries", "tag",
@@ -595,8 +667,13 @@ class ContextMarkCompiler:
             if index and (parent not in issued or issued[parent][1] != index - 1):
                 raise ContextMarkError("registry request is missing a successful predecessor")
         with self._registry_lock:
+            self._ensure_issuance_open()
             if self._requests or self._attempted_contexts:
                 raise ContextMarkError("registry restore requires an empty compiler")
+            if not _from_durable:
+                # Import only into a fresh empty durable ledger, before exposing
+                # any restored output or permitting a continuation.
+                self._persist([{"request_id": request_id, **entry} for request_id, entry in requests.items()], reserve=True)
             self._requests = requests
             self._context_owner = context_owner
             self._issued = issued

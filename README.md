@@ -25,11 +25,33 @@ The full-package command checks paper and citation keys, parses the current PDFs
 
 Requirements are CPU-only Python 3.12 or later and the two versions in `requirements.txt`. A complete run can also use `python -B run_experiments.py --out reproduced`. The output directory must be absent or empty at preparation; existing evidence is never deleted. A sharded continuation must use the same output directory. Its version-2 manifest binds current sources against the artifact root and generated evidence against the output root, including when output is outside this repository.
 
-`results/` retains the earlier Linux campaign and its original source bindings and 89-test result. The current suite has 107 tests: 12 regressions check restoration of complete canonical request transcripts, invalid risk inputs, and preservation of previous evidence; six additional tests cover restore-index membership and matched session transcripts. All 107 pass locally on Windows with CPython 3.12.14, cryptography 46.0.4, and SciPy 1.17.0. Historical CPU measurements are not overwritten or relabeled as current runs. After source changes, the old run manifest is expected not to match current sources; do not refresh its digests to conceal that difference. Verify a new run with `--evidence-dir` instead.
+`results/` retains the earlier Linux campaign and its original source bindings and 89-test result. The collection now has 127 tests: the previous 107 plus 20 durable-state tests. A focused repair run executes 37 tests (20 new durability, six existing restore/session, seven request-transcript and four risk-input checks), all passing without skips on Windows with CPython 3.12.14, cryptography 50.0.2, and SQLite 3.53.1. The complete 127-test collection and archived campaigns were not rerun in this repair. Historical CPU measurements are not overwritten or relabeled as current runs. After source changes, the old run manifest is expected not to match current sources; do not refresh its digests to conceal that difference. The bounded durability output is a separate evidence format, not a complete `verify_release.py --evidence-dir` campaign.
 
-Recovery authenticates snapshots and additionally validates request identities, canonical program bytes, request-to-record agreement, and successful ancestry of every non-genesis terminal attempt. It still does not implement persistent pending reservations or prevent rollback to an older authenticated snapshot. Risk formulas require nonnegative integer budgets and valid primitive probabilities; invalid inputs are rejected, not assigned a zero-security-loss result.
+Recovery authenticates snapshots and additionally validates request identities, canonical program bytes, request-to-record agreement, and successful ancestry of every non-genesis terminal attempt. The optional `registry_path` adds a single-owner authenticated SQLite ledger with pending reservation committed before key derivation/marking, terminal success/failure committed before release, and conservative restart recovery. It does not prevent rollback to an older authenticated snapshot. Risk formulas require nonnegative integer budgets and valid primitive probabilities; invalid inputs are rejected, not assigned a zero-security-loss result.
 
-The `scientific-checks.yml` workflow targets a flat artifact repository on Ubuntu 24.04. It installs the declared dependencies, bounds the complete owned finite run, retains scientific failure gates, and uploads raw output even after failure. The retained Linux run in `results/current/` passed the then-current 101 tests without skips, rejected all 47 mutations, and checked 4,352 compiled coalition cells, 128 closure cases, 4,802 field-reader cases and 496 threshold cases. Recovery and terminal-state checks passed in that run. Its CPU measurements remain tied to that execution; a fresh run exercises all 107 current tests.
+## Durable local issuance
+
+Supply the same persistent path and actual configured keys on every restart. The deterministic constructor below uses test keys only and is not a deployment key-management example:
+
+```python
+with ContextMarkCompiler.deterministic(["builder"], registry_path="state.sqlite") as issuer:
+    chain, artifact = issuer.issue([], program, actor="builder", operation="compile")
+```
+
+The parent directory must already exist on reliable local storage. SQLite uses `journal_mode=DELETE` and `synchronous=EXTRA`. Entry and header HMACs preserve integrity; unique request/context indices preserve reservation identity. Keep the database, journal (when present), and `.owner` file together. Do not replace or unlink the owner file during use. Another live owner rejects. On reopening, previously pending requests become durable `InterruptedAttempt` failures and cannot mark again, even if the previous process may have exited before marking. This is intentionally conservative. Exact successful retries return stored bytes, failures remain terminal, and an uncertain write stops both issuance and snapshot export until reopening. A closed issuer cannot continue. Omitting `registry_path` selects the original in-memory mode, which is not crash safe.
+
+These guarantees depend on protected files and real filesystem flush/locking behavior; there is no anti-rollback witness, distributed replica coordination, or power-loss validation. Deleting/replacing the database or switching to an untracked fresh path is outside the storage-freshness premise.
+
+The safe bounded entrypoint runs owned stub services only:
+
+```bash
+python -B -m unittest discover -s tests -p test_durable_registry.py -v
+python -B run_durable_experiment.py --out results/NEW-DIRECTORY --cpu-name "OBSERVED-CPU" --filesystem "OBSERVED-LOCAL-FILESYSTEM"
+```
+
+Use an absent output directory. The second command runs 37 focused tests, then two warm-ups and 11 measured pairs at depths 1, 8, and 32. It records all 39 pairs, matched terminal bytes, reopen/retry checks and environment metadata. The measured local run is in `results/durable-state/`. Its cryptography version is 50.0.2, not the historical 46.0.4 pin; the dependency specification for that earlier campaign is unchanged. The ordinary durable-state path uses the same authenticated storage and identical prevalidated bytes, excluding their preparation/signing/marking/checking. It is a persistence-cost reference, not an end-to-end watermark-free provenance competitor or a novelty result.
+
+The `scientific-checks.yml` workflow targets a flat artifact repository on Ubuntu 24.04. It installs the declared dependencies, bounds the complete owned finite run, retains scientific failure gates, and uploads raw output even after failure. The retained Linux run in `results/current/` passed the then-current 101 tests without skips, rejected all 47 mutations, and checked 4,352 compiled coalition cells, 128 closure cases, 4,802 field-reader cases and 496 threshold cases. Recovery and terminal-state checks passed in that run. Its CPU measurements remain tied to that execution; a full fresh run would exercise all 127 current tests. No CI or remote job was run for this repair.
 
 ## Evidence interpretation
 

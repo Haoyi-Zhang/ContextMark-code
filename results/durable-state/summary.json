@@ -1,0 +1,87 @@
+{
+  "schema": "contextmark-durable-local-v1",
+  "environment": {
+    "timestamp_utc": "2026-10-11T23:19:29.600284+00:00",
+    "python": "3.12.14",
+    "executable": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\pdf-env\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.28000-SP0",
+    "machine": "AMD64",
+    "cpu_name": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "logical_cpus": 20,
+    "cryptography": "50.0.2",
+    "sqlite": "3.53.1",
+    "filesystem": "NTFS on local fixed D: volume; observed with Get-Volume",
+    "journal_mode": "delete",
+    "synchronous": 3,
+    "timer": "perf_counter_ns",
+    "subprocesses": "owned crash fixtures only"
+  },
+  "protocol": {
+    "depths": [
+      1,
+      8,
+      32
+    ],
+    "measured_samples": 11,
+    "warmups": 2,
+    "program": "make_demo_program(2)",
+    "seed": 29,
+    "order": "alternating full/ordinary with sample parity; all samples retained",
+    "issue_boundary": "new private appends plus one final chain/artifact export; excludes database creation/open",
+    "full_reopen_boundary": "open, authenticate all rows, request/signature/binder/reader/ancestry validation",
+    "ordinary_reopen_boundary": "open and authenticate all rows, without compiler semantic validation",
+    "ordinary_baseline": "identical prevalidated pending/terminal bytes, same store; excludes preparation, signing and backend work",
+    "failure_scope": "abrupt child-process exits at call/commit boundaries; no power loss or live distributed service",
+    "production_robustness_or_novelty_measured": false
+  },
+  "validation": {
+    "tests": 37,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "elapsed_ms": 3259.1384
+  },
+  "measured_pairs": 33,
+  "warmup_pairs": 6,
+  "summaries": [
+    {
+      "depth": 1,
+      "samples": 11,
+      "full_issue_export_ms_median": 2.9327,
+      "full_issue_export_ms_p95": 3.372,
+      "ordinary_state_export_ms_median": 2.7232,
+      "ordinary_state_export_ms_p95": 3.0107,
+      "full_reopen_ms_median": 0.8983,
+      "full_reopen_ms_p95": 0.9754,
+      "ordinary_authenticated_open_ms_median": 0.4463,
+      "ordinary_authenticated_open_ms_p95": 0.4692
+    },
+    {
+      "depth": 8,
+      "samples": 11,
+      "full_issue_export_ms_median": 24.8478,
+      "full_issue_export_ms_p95": 26.2056,
+      "ordinary_state_export_ms_median": 22.4583,
+      "ordinary_state_export_ms_p95": 23.9341,
+      "full_reopen_ms_median": 3.4863,
+      "full_reopen_ms_p95": 4.037,
+      "ordinary_authenticated_open_ms_median": 0.7503,
+      "ordinary_authenticated_open_ms_p95": 1.1592
+    },
+    {
+      "depth": 32,
+      "samples": 11,
+      "full_issue_export_ms_median": 102.2571,
+      "full_issue_export_ms_p95": 127.4725,
+      "ordinary_state_export_ms_median": 90.1769,
+      "ordinary_state_export_ms_p95": 97.2253,
+      "full_reopen_ms_median": 11.5581,
+      "full_reopen_ms_p95": 13.7222,
+      "ordinary_authenticated_open_ms_median": 1.5922,
+      "ordinary_authenticated_open_ms_p95": 1.7503
+    }
+  ],
+  "all_terminal_entries_equal": true,
+  "all_reopens_and_retries_pass": true
+}

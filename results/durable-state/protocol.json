@@ -1,0 +1,18 @@
+{
+  "depths": [
+    1,
+    8,
+    32
+  ],
+  "measured_samples": 11,
+  "warmups": 2,
+  "program": "make_demo_program(2)",
+  "seed": 29,
+  "order": "alternating full/ordinary with sample parity; all samples retained",
+  "issue_boundary": "new private appends plus one final chain/artifact export; excludes database creation/open",
+  "full_reopen_boundary": "open, authenticate all rows, request/signature/binder/reader/ancestry validation",
+  "ordinary_reopen_boundary": "open and authenticate all rows, without compiler semantic validation",
+  "ordinary_baseline": "identical prevalidated pending/terminal bytes, same store; excludes preparation, signing and backend work",
+  "failure_scope": "abrupt child-process exits at call/commit boundaries; no power loss or live distributed service",
+  "production_robustness_or_novelty_measured": false
+}
