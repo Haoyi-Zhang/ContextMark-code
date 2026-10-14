@@ -50,6 +50,7 @@ from contextmark.threshold_backend import (
     read as threshold_read,
     read_candidates,
 )
+from suite_contract import EXPECTED_TESTS, source_test_ids, ids_sha256, test_output_valid
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "reproduced"
@@ -57,7 +58,6 @@ RAW = OUTPUT / "raw"
 DERIVED = OUTPUT / "derived"
 SEED = 20260718
 GAMES = ("removal", "nontransfer", "unforgeability", "collusion")
-EXPECTED_TESTS = 128
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -108,14 +108,14 @@ def run_tests() -> dict[str, Any]:
     )
     output = completed.stdout + completed.stderr
     (RAW / "test-output.txt").write_text(output, encoding="utf-8")
-    marker = f"Ran {EXPECTED_TESTS} tests"
-    valid = completed.returncode == 0 and marker in output and output.rstrip().endswith("OK")
+    valid = test_output_valid(output, completed.returncode, ROOT)
     summary = {
         "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python -m unittest discover -s tests -v",
         "deterministic_test_count": EXPECTED_TESTS,
         "passed": EXPECTED_TESTS if valid else 0,
         "failed": 0 if valid else 1,
         "returncode": completed.returncode,
+        "source_test_identity_sha256": ids_sha256(source_test_ids(ROOT)),
         "valid": valid,
     }
     write_json(RAW / "test-summary.json", summary)
@@ -628,7 +628,8 @@ def run_residual_subset_timing() -> list[dict[str, Any]]:
 
 def build_run_manifest() -> dict[str, Any]:
     manifest_path = RAW / "run-manifest.json"
-    paths = [ROOT / "requirements.txt", ROOT / "run_experiments.py", ROOT / "run_experiments_sharded.sh"]
+    paths = [ROOT / "requirements.txt", ROOT / "run_experiments.py", ROOT / "run_experiments_sharded.sh",
+             ROOT / "suite_contract.py", ROOT / "verify_release.py"]
     paths.extend((ROOT / "contextmark").glob("*.py"))
     paths.extend((ROOT / "tests").glob("*.py"))
     paths.extend(path for path in OUTPUT.rglob("*") if path.is_file() and path != manifest_path)

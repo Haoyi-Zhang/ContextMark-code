@@ -28,9 +28,9 @@ import stat
 import subprocess
 import sys
 from typing import Any
+from suite_contract import EXPECTED_TESTS, source_inventory_valid, test_output_valid
 
 DEFAULT_PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_TESTS = 133
 
 
 def require(condition: bool, message: str) -> None:
@@ -93,29 +93,41 @@ def verify_execution_manifest(artifact_root: Path, evidence_dir: Path | None = N
 
 
 def verify_full_package(project_root: Path) -> dict[str, Any]:
-    require(
-        sorted(path.name for path in project_root.iterdir())
-        == ["README.md", "artifact", "paper"],
-        "unexpected project-root entries",
-    )
+    top_level = sorted(path.name for path in project_root.iterdir())
+    require(top_level in (["artifact", "paper"], ["README.md", "artifact", "paper"]),
+            "unexpected project-root entries")
+    if "README.md" in top_level:
+        require((project_root / "README.md").is_file(), "project-root README must be a file")
     paper = (project_root / "paper/main.tex").read_text(encoding="utf-8")
     commands = [key.strip() for group in re.findall(r"\\cite\{([^}]+)\}", paper)
                 for key in group.split(",")]
-    bib = re.findall(
-        r"(?m)^@\w+\{([^,]+),",
+    bib_entries = re.findall(
+        r"(?m)^@(\w+)\{([^,]+),",
         (project_root / "paper/references.bib").read_text(encoding="utf-8"),
     )
+    require(len({key for _kind, key in bib_entries}) == len(bib_entries), "duplicate bibliography key")
+    controls = {key for kind, key in bib_entries if kind.casefold() == "ieeetranbstctl"}
+    control_cites = [key.strip() for group in re.findall(r"\\bstctlcite\{([^}]+)\}", paper)
+                     for key in group.split(",")]
+    require(len(control_cites) == len(controls) and set(control_cites) == controls,
+            "IEEE bibliography control not consumed by bstctlcite")
+    bib = [key for kind, key in bib_entries if kind.casefold() != "ieeetranbstctl"]
+    require(not (set(commands) & controls), "IEEE bibliography control used as an ordinary citation")
     require(set(commands) == set(bib), "citation keys and bibliography differ")
-    reviewed = list(
-        csv.DictReader((project_root / "artifact/literature/reference-verification.csv").open())
-    )
+    with (project_root / "artifact/literature/reference-verification.csv").open(
+        newline="", encoding="utf-8"
+    ) as stream:
+        reviewed = list(csv.DictReader(stream))
     require(
         len(reviewed) == len(bib) and {row["citation_key"] for row in reviewed} == set(commands),
         "reference review ledger mismatch",
     )
-    support = list(csv.DictReader((project_root / "artifact/citation_support.csv").open()))
+    with (project_root / "artifact/citation_support.csv").open(
+        newline="", encoding="utf-8"
+    ) as stream:
+        support = list(csv.DictReader(stream))
     require(
-        {row["citation_key"] for row in support} == set(commands),
+        len(support) == len(bib) and {row["citation_key"] for row in support} == set(commands),
         "local citation support keys mismatch",
     )
     require("\\bibliographystyle{IEEEtran}" in paper, "not citation-order IEEE bibliography style")
@@ -152,13 +164,14 @@ def main() -> None:
     before = records(root)
     execution = verify_execution_manifest(artifact_root, args.evidence_dir)
     full = verify_full_package(project_root) if project_root is not None else None
+    require(source_inventory_valid(artifact_root), "owned test source inventory mismatch")
 
     test_result = "skipped by explicit flag"
     if not args.skip_tests:
         env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1",
                    PYTHONPATH=str(artifact_root) + os.pathsep + os.environ.get("PYTHONPATH", ""))
         proc = subprocess.run(
-            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests", "-q"],
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests", "-v"],
             cwd=artifact_root,
             env=env,
             text=True,
@@ -166,12 +179,7 @@ def main() -> None:
             timeout=180,
         )
         output = proc.stdout + proc.stderr
-        require(
-            proc.returncode == 0
-            and re.search(rf"Ran {EXPECTED_TESTS} tests", output) is not None
-            and "OK" in output,
-            output,
-        )
+        require(test_output_valid(output, proc.returncode, artifact_root), output)
         test_result = f"{EXPECTED_TESTS}/{EXPECTED_TESTS} PASS"
     require(before == records(root), "verification modified the selected root")
     require(not list(root.rglob("__pycache__")), "bytecode cache in selected root")

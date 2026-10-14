@@ -136,6 +136,115 @@ class RiskInputRegression(unittest.TestCase):
 
 
 class ReproductionOutputRegression(unittest.TestCase):
+    def test_declared_suite_size_matches_owned_test_sources(self):
+        from pathlib import Path
+        from suite_contract import EXPECTED_TESTS, source_inventory_valid, source_test_ids, test_output_valid
+
+        root = Path(__file__).resolve().parents[1]
+        ids = source_test_ids(root)
+        self.assertEqual(len(ids), EXPECTED_TESTS)
+        self.assertTrue(source_inventory_valid(root))
+
+        def transcript(selected, ending="OK"):
+            lines = [f"{name.rsplit('.', 1)[-1]} ({name}) ... ok" for name in selected]
+            return "\n".join(lines) + f"\n\nRan {len(selected)} tests in 0.001s\n\n{ending}\n"
+
+        complete = transcript(ids)
+        self.assertTrue(test_output_valid(complete, 0, root))
+        self.assertFalse(test_output_valid(complete, 1, root))
+        self.assertFalse(test_output_valid(transcript(ids[1:]), 0, root))
+        substituted = ids.copy()
+        substituted[0] = "test_contextmark.CanonicalTests.test_substituted_fixture"
+        self.assertFalse(test_output_valid(transcript(substituted), 0, root))
+        self.assertFalse(test_output_valid(transcript(ids, "OK (skipped=1)"), 0, root))
+        self.assertFalse(test_output_valid(transcript(ids, "FAILED (failures=1)"), 1, root))
+
+    def test_exact_full_package_shape_bst_control_and_flat_mode(self):
+        import hashlib
+        import io
+        import json
+        from contextlib import redirect_stdout
+        from pathlib import Path
+        import shutil
+        import sys
+        import tempfile
+        from unittest.mock import patch
+        import verify_release as verifier
+
+        source_root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "packet"
+            paper = root / "paper"
+            artifact = root / "artifact"
+            (artifact / "contextmark").mkdir(parents=True)
+            (artifact / "tests").mkdir()
+            (artifact / "results" / "raw").mkdir(parents=True)
+            (artifact / "literature").mkdir()
+            paper.mkdir()
+            (artifact / "contextmark" / "__init__.py").write_text("", encoding="utf-8")
+            for path in (source_root / "tests").glob("test_*.py"):
+                shutil.copyfile(path, artifact / "tests" / path.name)
+            text = "\\bstctlcite{authorDisplay}\\cite{real}\\bibliographystyle{IEEEtran}\n"
+            (paper / "main.tex").write_text(text, encoding="utf-8")
+            (paper / "references.bib").write_text(
+                "@IEEEtranBSTCTL{authorDisplay, CTLdash_repeated_names={no}}\n"
+                "@article{real, title={Owned fixture}}\n", encoding="utf-8")
+            (artifact / "literature" / "reference-verification.csv").write_text(
+                "citation_key\nreal\n", encoding="utf-8")
+            (artifact / "citation_support.csv").write_text(
+                "citation_key\nreal\n", encoding="utf-8")
+            manifest = {
+                "schema": "contextmark-run-manifest-v2",
+                "entry_count": 1,
+                "entries": [{
+                    "base": "artifact",
+                    "path": "contextmark/__init__.py",
+                    "sha256": hashlib.sha256(b"").hexdigest(),
+                }],
+            }
+            (artifact / "results" / "raw" / "run-manifest.json").write_text(
+                json.dumps(manifest), encoding="utf-8")
+
+            # This fixture checks package/citation structure, not PDF parsing.
+            with patch.dict(sys.modules, {"fitz": None}):
+                self.assertEqual(verifier.verify_full_package(root)["references"], 1)
+                (root / "README.md").write_text("Optional navigation\n", encoding="utf-8")
+                self.assertEqual(verifier.verify_full_package(root)["references"], 1)
+                (root / "unrelated.txt").write_text("not a package root\n", encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "unexpected project-root entries"):
+                    verifier.verify_full_package(root)
+                (root / "unrelated.txt").unlink()
+                (paper / "main.tex").write_text("\\cite{real}\\bibliographystyle{IEEEtran}\n", encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "control not consumed"):
+                    verifier.verify_full_package(root)
+                (paper / "main.tex").write_text(text.replace("{real}", "{real,authorDisplay}"), encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "control used as an ordinary citation"):
+                    verifier.verify_full_package(root)
+                (paper / "main.tex").write_text(text, encoding="utf-8")
+                (paper / "references.bib").write_text(
+                    "@IEEEtranBSTCTL{authorDisplay, CTLdash_repeated_names={no}}\n", encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "citation keys and bibliography differ"):
+                    verifier.verify_full_package(root)
+                (paper / "references.bib").write_text(
+                    "@IEEEtranBSTCTL{authorDisplay, CTLdash_repeated_names={no}}\n"
+                    "@article{real, title={Owned fixture}}\n", encoding="utf-8")
+                (artifact / "literature" / "reference-verification.csv").write_text(
+                    "citation_key\n", encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "reference review ledger mismatch"):
+                    verifier.verify_full_package(root)
+                (artifact / "literature" / "reference-verification.csv").write_text(
+                    "citation_key\nreal\n", encoding="utf-8")
+                (artifact / "citation_support.csv").write_text("citation_key\n", encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "local citation support keys mismatch"):
+                    verifier.verify_full_package(root)
+                (artifact / "citation_support.csv").write_text("citation_key\nreal\n", encoding="utf-8")
+                self.assertEqual(verifier.classify_root(artifact)[0], "standalone_artifact")
+                with patch.object(sys, "argv", ["verify_release.py", "--root", str(artifact),
+                                                "--evidence-dir", str(artifact / "results"), "--skip-tests"]):
+                    with redirect_stdout(io.StringIO()) as output:
+                        verifier.main()
+                self.assertEqual(json.loads(output.getvalue())["mode"], "standalone_artifact")
+
     def test_prepare_does_not_delete_existing_evidence(self):
         import run_experiments as driver
         from unittest.mock import MagicMock, patch

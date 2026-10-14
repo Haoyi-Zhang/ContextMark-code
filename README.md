@@ -33,15 +33,16 @@ PYTHONDONTWRITEBYTECODE=1 python artifact/verify_release.py --root . --evidence-
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python verify_release.py --root . --evidence-dir reproduced
 ```
 
-The full-package command checks paper and citation keys, parses the current PDFs, checks retained execution evidence, and optionally runs tests. The standalone command checks artifact execution evidence and tests. Neither fixes author slots, page counts, or manuscript bytes to a historical package.
+The full-package command accepts the current two-root `paper/` and `artifact/` packet, with an optional root navigation `README.md`; it checks paper and citation keys, parses the current PDFs, checks execution evidence, and optionally runs tests. The standalone command checks artifact execution evidence and tests. Neither fixes author slots, page counts, or manuscript bytes to a historical package.
 
 Requirements are CPU-only Python 3.12 or later and the two versions in `requirements.txt`. A complete run can also use `python -B run_experiments.py --out reproduced`. The output directory must be absent or empty at preparation; existing evidence is never deleted. A sharded continuation must use the same output directory. Its version-2 manifest binds current sources against the artifact root and generated evidence against the output root, including when output is outside this repository.
 
 `results/` retains the earlier Linux campaign, original source bindings and
 89-test result. Historical focused and CI records remain separate. The present
-collection has 133 tests: the 128-test source snapshot plus two owner-lifetime
-and three loopback checks. The current reviewed state/RPC subset executes 43
-tests without skips (21 durable, six restore/session, seven request-transcript,
+collection has 135 tests: the 128-test source snapshot plus two owner-lifetime,
+three loopback, and two package/test-contract regressions. The current reviewed
+state/RPC subset executes 43 tests without skips (21 durable, six restore/session,
+seven request-transcript,
 four risk-input, two owner-lifetime and three loopback). Its results are in
 `results/owned-workflow/tests.json`. This subset does not rerun the archived
 attack/probability campaigns. Historical CPU data and source bindings are not
