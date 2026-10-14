@@ -6,8 +6,8 @@ import hashlib
 from pathlib import Path
 import re
 
-EXPECTED_TESTS = 135
-EXPECTED_TEST_IDS_SHA256 = "8c7a50a9b8cca278cf69996721bea213b515ce6cac724f2b36645cdda828d194"
+EXPECTED_TESTS = 136
+EXPECTED_TEST_IDS_SHA256 = "99bb8e337ff6c3d161144c7386e712f331eb1edfe2c4a6efcf048cd52919c8c1"
 
 
 def source_test_ids(root: Path) -> list[str]:

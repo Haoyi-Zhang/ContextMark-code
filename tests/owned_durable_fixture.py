@@ -10,6 +10,7 @@ import sys
 
 from contextmark.canonical import canonical_bytes
 from contextmark.compiler import AuthenticatedEnvelopeBackend, ContextMarkCompiler, make_demo_program
+from contextmark.durable_registry import DurableRegistry
 
 ARTIFACT_ROOT = Path(__file__).resolve().parents[1]
 WORK_ROOT = Path(os.environ.get("CONTEXTMARK_OWNED_WORK_ROOT",
@@ -61,12 +62,38 @@ def compiler(path, backend, **kwargs):
         chain_id="owned-durable-repair", registry_path=str(path), backend=backend, **kwargs)
 
 
+def retire_with_process_exit(folder, mode):
+    """Interrupt native pending retirement, with no issuance or backend mark."""
+    original = DurableRegistry.write_entries
+
+    def retire(store, entries, *, reserve=False):
+        if (reserve or len(entries) != 2
+                or any(entry.get("status") != "failed"
+                       or entry.get("failure_code") != "InterruptedAttempt" for entry in entries)):
+            raise ValueError("expected two owned pending-to-failed recovery entries")
+        if mode == "during-recovery":
+            def before_commit(sql):
+                if sql.strip().upper() == "COMMIT":
+                    os._exit(77)
+            store.connection.set_trace_callback(before_commit)
+        original(store, entries, reserve=False)
+        if mode == "after-recovery":
+            os._exit(78)
+        raise RuntimeError("native retirement did not reach the injected exit")
+
+    DurableRegistry.write_entries = retire
+    with compiler(folder / "state.sqlite", OwnedStubBackend(call_log=folder / "calls.jsonl")):
+        raise RuntimeError("recovery unexpectedly returned without the injected exit")
+
+
 def child_main():
     # Paths are restricted to this candidate's generated local work directory.
     folder = Path(sys.argv[1]).resolve()
     if not folder.is_relative_to(WORK_ROOT.resolve()):
         raise ValueError("child fixture must stay inside the P029 candidate")
     mode = sys.argv[2]
+    if mode in {"during-recovery", "after-recovery"}:
+        return retire_with_process_exit(folder, mode)
     append = mode.startswith("append-")
     if append:
         mode = mode.removeprefix("append-")

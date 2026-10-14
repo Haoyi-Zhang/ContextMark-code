@@ -39,9 +39,10 @@ Requirements are CPU-only Python 3.12 or later and the two versions in `requirem
 
 `results/` retains the earlier Linux campaign, original source bindings and
 89-test result. Historical focused and CI records remain separate. The present
-collection has 135 tests: the 128-test source snapshot plus two owner-lifetime,
-three loopback, and two package/test-contract regressions. The current reviewed
-state/RPC subset executes 43 tests without skips (21 durable, six restore/session,
+collection has 136 tests: the 128-test source snapshot plus two owner-lifetime,
+three loopback, two package/test-contract regressions, and one native recovery
+transaction regression. The retained state/RPC subset executed 43 tests without
+skips (21 durable, six restore/session,
 seven request-transcript,
 four risk-input, two owner-lifetime and three loopback). Its results are in
 `results/owned-workflow/tests.json`. This subset does not rerun the archived
@@ -104,7 +105,7 @@ python -B -m unittest discover -s tests -p test_durable_registry.py -v
 python -B run_durable_experiment.py --out results/NEW-DIRECTORY --cpu-name "OBSERVED-CPU" --filesystem "OBSERVED-LOCAL-FILESYSTEM"
 ```
 
-Use an absent output directory. The current second command selects 38 focused
+Use an absent output directory. The current second command selects 39 focused
 tests, then two warm-ups and 11 measured pairs at depths 1, 8, and 32. It retains
 all 39 pairs and matched terminal bytes. The historical local run in
 `results/durable-state/` used its then-current 37-test selection and cryptography

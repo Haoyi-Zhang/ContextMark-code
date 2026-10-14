@@ -305,6 +305,83 @@ class DurableRegistryTests(unittest.TestCase):
             restored.issue(**request())
         self.assertEqual(b.calls, 0)
 
+    def test_native_retirement_crash_preserves_atomic_state_indices_and_budget(self):
+        def sql_state(path):
+            with closing(sqlite3.connect(path)) as db:
+                rows = db.execute("SELECT request_id,context,body,tag FROM attempts ORDER BY request_id").fetchall()
+                header = db.execute("SELECT body,tag FROM header WHERE id=1").fetchone()
+                return {row[0]: row[1:] for row in rows}, header
+
+        for mode, code in (("during-recovery", 77), ("after-recovery", 78)):
+            with self.subTest(mode=mode):
+                folder = Path(self.folder.name) / mode
+                folder.mkdir()
+                self.path = folder / "state.sqlite"
+                log = folder / "calls.jsonl"
+                seed = self.open(OwnedStubBackend(call_log=log))
+                pair = seed.issue(**request())
+                success_id = next(iter(seed._requests))
+                requests, pending = [], []
+                for label in ("a", "b"):
+                    args = dict(parent_chain=deepcopy(pair[0]), program=deepcopy(pair[1]),
+                                actor="builder", operation="owned-retire-" + label,
+                                metadata={"issue_id": label})
+                    program, unsigned, context, request_id = seed._prepare_request(**args)
+                    requests.append(args)
+                    pending.append(dict(request_id=request_id, status="pending",
+                                        request_program_hex=program.hex(), unsigned=unsigned, context=context))
+                # Seed semantically valid committed pending rows without marking:
+                # recovery must also retire attempts that never reached a backend.
+                seed._persist(pending, reserve=True)
+                before, header_before = sql_state(self.path)
+                self.assertEqual(len(before), 3)
+                self.assertEqual(sum(json.loads(row[1])["status"] == "pending" for row in before.values()), 2)
+                seed.close()
+                command = [sys.executable, "-B"] + (["-O"] if sys.flags.optimize else [])
+                command += [str(ARTIFACT_ROOT / "tests" / "owned_durable_fixture.py"), str(folder), mode]
+                child = subprocess.run(command, cwd=ARTIFACT_ROOT,
+                    env={**os.environ, "PYTHONPATH": str(ARTIFACT_ROOT), "PYTHONDONTWRITEBYTECODE": "1"},
+                    capture_output=True, text=True, timeout=20)
+                self.assertEqual(child.returncode, code, child.stdout + child.stderr)
+                after, header_after = sql_state(self.path)
+                self.assertEqual(set(after), set(before))
+                self.assertEqual(after[success_id], before[success_id])
+                if mode == "during-recovery":
+                    self.assertEqual((after, header_after), (before, header_before))
+                else:
+                    for entry in pending:
+                        actual = json.loads(after[entry["request_id"]][1])
+                        self.assertEqual(actual, {**entry, "status": "failed", "failure_code": "InterruptedAttempt"})
+                    self.assertEqual(json.loads(header_after[0]),
+                                     {**json.loads(header_before[0]), "revision": json.loads(header_before[0])["revision"] + 1})
+                snapshot = None
+                for _ in range(2):
+                    backend = OwnedStubBackend(call_log=log)
+                    recovered = self.open(backend, max_contexts=3)
+                    self.assertEqual(recovered.issue(**request()), pair)
+                    for args in requests:
+                        with self.assertRaisesRegex(MarkingError, "InterruptedAttempt"):
+                            recovered.issue(**args)
+                    alias = deepcopy(requests[0])
+                    alias["program"]["_contextmark"] = {"owned": "different canonical request, same binder"}
+                    with self.assertRaisesRegex(ContextMarkError, "another logical request"):
+                        recovered.issue(**alias)
+                    with self.assertRaisesRegex(ContextMarkError, "attempt budget"):
+                        recovered.issue(pair[0], pair[1], actor="builder", operation="owned-over-budget")
+                    self.assertEqual(recovered.registry_status_counts(), (1, 2, 3))
+                    current = recovered.export_registry_snapshot()
+                    if snapshot is not None:
+                        self.assertEqual(current, snapshot)
+                    snapshot = current
+                    self.assertEqual(backend.calls, 0)
+                    recovered.close()
+                self.assertEqual(len(log.read_text().splitlines()), 1)
+                print("retirement_recovery=" + json.dumps({"mode": mode, "child_exit": child.returncode,
+                    "child_optimized": bool(sys.flags.optimize), "committed_pending_before": 2,
+                    "attempts_after_two_restarts": 3, "successes": 1, "failed": 2,
+                    "marks_during_recovery_and_retries": 0, "success_row_unchanged": True,
+                    "alias_rejected": True, "budget_preserved": True}, sort_keys=True))
+
     def test_uncertain_error_after_committed_terminal_state(self):
         for mode in ("ok", "raise"):
             with self.subTest(mode=mode):
