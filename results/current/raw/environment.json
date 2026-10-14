@@ -1,0 +1,16 @@
+{
+  "cpu_model": "Intel(R) Xeon(R) 6973P-C",
+  "cryptography": "46.0.4",
+  "gpu_used": false,
+  "human_evidence_used": false,
+  "learned_model_used": false,
+  "logical_cpu_count": 2,
+  "machine": "x86_64",
+  "model_api_used": false,
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "private_data_used": false,
+  "python": "3.12.14",
+  "python_implementation": "CPython",
+  "seed": 20260718,
+  "timestamp_utc": "2026-10-06T05:25:06Z"
+}

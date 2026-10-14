@@ -1,0 +1,8 @@
+{
+  "calibration_challenge_one_probability": 0.5,
+  "calibration_failure_probability": 0.5,
+  "deployment_challenge_one_probability": 0.5,
+  "deployment_failure_probability": 1.0,
+  "equal_unconditional_challenge_marginal": true,
+  "historywise_conditional_domination_required": true
+}

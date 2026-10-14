@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact\\reproduce_owned_failures.py",
+    "--out",
+    "D:/CodexProjects/2026-07-13/new-chat-4/completion_workspace/library_review/private/substantive_library_completion/P029/network-failures/raw",
+    "--work",
+    "D:/CodexProjects/2026-07-13/new-chat-4/completion_workspace/library_review/private/substantive_library_completion/P029/network-failures/raw-work"
+  ],
+  "cwd": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact",
+  "exit_code": 0,
+  "wall_seconds": 0.15983910000068136,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.28000-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "script_sha256": "66f00e386468f46bfb4d27cc692b30980b3326838f713b37971690871a090598",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "TMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\network-failures\\temp",
+    "TEMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\network-failures\\temp",
+    "CONTEXTMARK_OWNED_WORK_ROOT": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\network-failures\\work",
+    "PYTHONPATH": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact;D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact\\tests"
+  }
+}

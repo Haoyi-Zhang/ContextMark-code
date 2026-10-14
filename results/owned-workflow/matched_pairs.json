@@ -1,0 +1,146 @@
+[
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": -1,
+    "warmup": true
+  },
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 0,
+    "warmup": false
+  },
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 1,
+    "warmup": false
+  },
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 2,
+    "warmup": false
+  },
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 3,
+    "warmup": false
+  },
+  {
+    "depth": 1,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 4,
+    "warmup": false
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": -1,
+    "warmup": true
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 0,
+    "warmup": false
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 1,
+    "warmup": false
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 2,
+    "warmup": false
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 3,
+    "warmup": false
+  },
+  {
+    "depth": 8,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 4,
+    "warmup": false
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": -1,
+    "warmup": true
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 0,
+    "warmup": false
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 1,
+    "warmup": false
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 2,
+    "warmup": false
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 3,
+    "warmup": false
+  },
+  {
+    "depth": 32,
+    "identical_pairs": true,
+    "identical_requests": true,
+    "identical_terminal_bytes": true,
+    "sample": 4,
+    "warmup": false
+  }
+]

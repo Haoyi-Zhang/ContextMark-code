@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\owner_probe.py"
+  ],
+  "cwd": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact",
+  "exit_code": 0,
+  "wall_seconds": 0.10181800002465025,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.28000-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "script_sha256": "9cea7bc96f5967ca828b8256f4ebf6950ba7decbf3c2bd2c7c884f579bafe866",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "TMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\before-owner\\temp",
+    "TEMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\before-owner\\temp",
+    "CONTEXTMARK_OWNED_WORK_ROOT": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\before-owner\\work",
+    "PYTHONPATH": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact;D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact\\tests"
+  }
+}

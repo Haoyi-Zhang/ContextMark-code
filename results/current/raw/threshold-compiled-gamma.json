@@ -1,0 +1,27 @@
+{
+  "entries": [
+    {
+      "context": "9ede0633f99c7201b40f1cb5aab38f4548c16ec19fbf2ab1a8b43123aa6ccd99",
+      "key_rule": "compiler-derived key for this context",
+      "payload_rule": "exact signed-tip context bytes",
+      "record_signature": "14725798339287679b858e484875f78f351cb93c19d00e1c9cbc92122cbebe0970760c03a065c3011044d1c3f7e33a54a36ac523f768293abe482181b5d3050f",
+      "record_valid": true
+    },
+    {
+      "context": "fb1e4ac7dd57e46c5f6de0689fda5c7d67bb8b4414fbf588846956b6ab9662d4",
+      "key_rule": "compiler-derived key for this context",
+      "payload_rule": "exact signed-tip context bytes",
+      "record_signature": "56e5c99934fa1868673ebbf0d9afe3e02cafbf9190f5abdaae8b8de4977dc653807d07b07830b42534f4f1c282753f094cc03971974b208b346c5306759a8b0d",
+      "record_valid": true
+    },
+    {
+      "context": "54eb871109d762aa5f57ec9b0fb47d3d949d171ad906dcbdf932cb898bb9ae23",
+      "key_rule": "compiler-derived key for this context",
+      "payload_rule": "exact signed-tip context bytes",
+      "record_signature": "497d60fd9d0ac05b3ed5df7ca1165c2d6d4c5d4abe5b8aa6cef9c5bae7cbd46090c4fd55f6ae5bac49a953850d3f0902fab893e61d15cd2bf7737ef8ea1caa0d",
+      "record_valid": true
+    }
+  ],
+  "schema": "contextmark-compiled-coalition-gamma-v1",
+  "trace_rule": "Gamma binds each valid signed tip d_j to its compiler-derived key k_j; Trace_Gamma(Y) is the set of j for which Read_{k_j}(Y)=d_j; a scalar contributor is the lexicographically smallest traced context"
+}

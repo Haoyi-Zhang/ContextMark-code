@@ -1,0 +1,11 @@
+{
+  "attack_count": 6,
+  "configuration_count": 64,
+  "evidence_kind": "truth_table_consistency",
+  "independent_interaction_evidence": false,
+  "monotonicity_violations": 0,
+  "row_count": 384,
+  "schema": "factorized-truth-table-consistency-v1",
+  "shared_rule": "REQUIRED",
+  "valid": true
+}

@@ -1,0 +1,758 @@
+[
+  {
+    "case": "lost-mark-response",
+    "client_events": [
+      {
+        "error": "RemoteDisconnected",
+        "operation": "mark",
+        "request_body_bytes": 341,
+        "response_body_bytes": 0,
+        "response_header_bytes": 0,
+        "rpc_ms": 1.2937
+      }
+    ],
+    "first_error": "backend failed: RemoteDisconnected",
+    "mark_calls": 1,
+    "read_calls": 0,
+    "recovered_retry_error": "terminal backend failure: RemoteDisconnected",
+    "request": {
+      "actor": "builder",
+      "operation": "lost-mark-response",
+      "parent_chain": [],
+      "program": {
+        "body": [
+          {
+            "left": 0,
+            "op": "add",
+            "right": 3,
+            "target": "v0000"
+          },
+          {
+            "left": 1,
+            "op": "xor",
+            "right": 20,
+            "target": "v0001"
+          }
+        ],
+        "language": "finite-expr-v1",
+        "module": "demo",
+        "return": "v0001"
+      }
+    },
+    "same_owner_retry_error": "terminal backend failure: RemoteDisconnected",
+    "scope": "owned real finite threshold work over loopback; not native or secure remote deployment",
+    "server_events": [
+      {
+        "committed_status_before_mark": "pending",
+        "crypto_and_inspection_ms": 0.4638,
+        "input": {
+          "payload": "1183c455856b1ba1f75a4945e8ee8e54f45db93bae4c08e4fe19286af9f1b8bd",
+          "program": {
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "test_key_hex": "974d9885d8513b7f48801f57333d00abb9f8438347ccddffc5bb436a6368e040"
+        },
+        "operation": "mark",
+        "output": {
+          "_threshold_carriers": [
+            {
+              "commitment": "abdb5018f9a90c38e20f94f6ab42f452c2e3b27774da5f9c7ed0f5db9b42ee8a",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "6115900c1a5707aadd8d61e37e1e9ea3e480cdac019347e74e651d9d1b5d450f",
+              "value": "18f3294e4785cbd3dee2308b50377926047fc952095f0b4bec198c05e1618ebea7da2e1db1ea1ffa3142b2f8a1172b13f26297222fc5e1cbe55bb84da61b34d9c",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "abdb5018f9a90c38e20f94f6ab42f452c2e3b27774da5f9c7ed0f5db9b42ee8a",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "c7134f3d3205edacf0f4af8b97fcb285bea6f22650019e0103191ee87802cc37",
+              "value": "4ee471e4669659f4ab91bcb573c48ea374563df060046ba450e3e18c35bfaf449141059959e415edd97813642176342abbd8089b4d68e541855eaef4719e73b6b",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "abdb5018f9a90c38e20f94f6ab42f452c2e3b27774da5f9c7ed0f5db9b42ee8a",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "f95558cee19cd98d7d602331aefc8c60927fc66d87ebe44b292aece6fff292e0",
+              "value": "a1d3d9c25d31aa62660ea47e6aa740784f835ddb03f021092e5f0092fd1a6191bd4cc2b8504493951815c5d6dfac0429aba62fff13cdcaef2fea767b1228d822a",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "abdb5018f9a90c38e20f94f6ab42f452c2e3b27774da5f9c7ed0f5db9b42ee8a",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "36960d5924f27c8d87b6784a951e4d4f18b9f6a550119fa77877726474f1868e",
+              "value": "111c160e82b57bd1d0e58e7e634df8ea496072911f5222b7a848ae91a3771a5a62bfd657a950b98efed1bca50dbb89b10c1cd0d4d82f492d4e4ff0ee187ba621d9",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "abdb5018f9a90c38e20f94f6ab42f452c2e3b27774da5f9c7ed0f5db9b42ee8a",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "c97224574077b9d6efae3aeac521a8d7ecb510f71aa46199c42ba83e1437251f",
+              "value": "19ead0755d1089224a47086ecd26d792847e19f95339a8af853679b21e4c57b81dd52ede0283925fe588a20d2159bf8dffe4ca0869add3cf2a49c7827d25311a78",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "request_body_bytes": 341,
+        "request_header_bytes": 145,
+        "response_lost": true
+      }
+    ],
+    "terminal_snapshot": {
+      "attempted_context_count": 1,
+      "attempted_contexts": [
+        "1183c455856b1ba1f75a4945e8ee8e54f45db93bae4c08e4fe19286af9f1b8bd"
+      ],
+      "chain_id": "owned-loopback-cost",
+      "entries": [
+        {
+          "context": "1183c455856b1ba1f75a4945e8ee8e54f45db93bae4c08e4fe19286af9f1b8bd",
+          "failure_code": "RemoteDisconnected",
+          "request_id": "5a0490492f6a82601a5667a1ca8402de6d6d1e1ccee73e68cd84c9756c2d3b4b",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2264656d6f222c2272657475726e223a227630303031227d",
+          "status": "failed",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+            "chain_id": "owned-loopback-cost",
+            "index": 0,
+            "metadata": {},
+            "operation": "lost-mark-response",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        }
+      ],
+      "entry_count": 1,
+      "tag": "a214422292e76c28722466349e9bf903b6529fa6f97fea54f6fbc53738179140",
+      "version": "contextmark-registry-v1"
+    },
+    "test_keys_only": true
+  },
+  {
+    "case": "lost-recovery-read",
+    "client_events": [
+      {
+        "error": null,
+        "operation": "mark",
+        "request_body_bytes": 341,
+        "response_body_bytes": 1955,
+        "response_header_bytes": 166,
+        "rpc_ms": 1.0907
+      },
+      {
+        "error": null,
+        "operation": "read",
+        "request_body_bytes": 2039,
+        "response_body_bytes": 77,
+        "response_header_bytes": 164,
+        "rpc_ms": 1.0873
+      },
+      {
+        "error": "RemoteDisconnected",
+        "operation": "read",
+        "request_body_bytes": 2039,
+        "response_body_bytes": 0,
+        "response_header_bytes": 0,
+        "rpc_ms": 1.01
+      },
+      {
+        "error": null,
+        "operation": "read",
+        "request_body_bytes": 2039,
+        "response_body_bytes": 77,
+        "response_header_bytes": 164,
+        "rpc_ms": 1.0629
+      }
+    ],
+    "mark_calls": 1,
+    "pair": [
+      [
+        {
+          "actor": "builder",
+          "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+          "chain_id": "owned-loopback-cost",
+          "context": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+          "index": 0,
+          "metadata": {},
+          "operation": "lost-recovery-read",
+          "parent": "GENESIS",
+          "signature": "a0416fe6a44e6f6dab221bb834c88ab757e955cca3e4a5d8e6637d673ba02744c51fca285f7a591e3038eac720e9f6c23f2abddcbdc9632c1c1086164e6f150a",
+          "version": "contextmark-record-v1"
+        }
+      ],
+      {
+        "_threshold_carriers": [
+          {
+            "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+            "index": 1,
+            "n": 5,
+            "t": 3,
+            "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+            "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+            "index": 2,
+            "n": 5,
+            "t": 3,
+            "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+            "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+            "index": 3,
+            "n": 5,
+            "t": 3,
+            "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+            "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+            "index": 4,
+            "n": 5,
+            "t": 3,
+            "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+            "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+            "index": 5,
+            "n": 5,
+            "t": 3,
+            "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+            "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+            "version": "threshold-carrier-v1"
+          }
+        ],
+        "body": [
+          {
+            "left": 0,
+            "op": "add",
+            "right": 3,
+            "target": "v0000"
+          },
+          {
+            "left": 1,
+            "op": "xor",
+            "right": 20,
+            "target": "v0001"
+          }
+        ],
+        "language": "finite-expr-v1",
+        "module": "demo",
+        "return": "v0001"
+      }
+    ],
+    "read_calls": 3,
+    "recovery_error": "durable registry recovery failed",
+    "request": {
+      "actor": "builder",
+      "operation": "lost-recovery-read",
+      "parent_chain": [],
+      "program": {
+        "body": [
+          {
+            "left": 0,
+            "op": "add",
+            "right": 3,
+            "target": "v0000"
+          },
+          {
+            "left": 1,
+            "op": "xor",
+            "right": 20,
+            "target": "v0001"
+          }
+        ],
+        "language": "finite-expr-v1",
+        "module": "demo",
+        "return": "v0001"
+      }
+    },
+    "scope": "owned real finite threshold work over loopback; not native or secure remote deployment",
+    "server_events": [
+      {
+        "committed_status_before_mark": "pending",
+        "crypto_and_inspection_ms": 0.42,
+        "input": {
+          "payload": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+          "program": {
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "test_key_hex": "b4b45e8e40bb2adecfcc862917d8996c179800d21ac4bdcc92eabccd4b7e8172"
+        },
+        "operation": "mark",
+        "output": {
+          "_threshold_carriers": [
+            {
+              "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+              "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+              "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+              "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+              "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+              "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "request_body_bytes": 341,
+        "request_header_bytes": 145,
+        "response_lost": false
+      },
+      {
+        "crypto_and_inspection_ms": 0.5236,
+        "input": {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+                "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+                "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+                "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+                "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+                "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "test_key_hex": "b4b45e8e40bb2adecfcc862917d8996c179800d21ac4bdcc92eabccd4b7e8172"
+        },
+        "operation": "read",
+        "output": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+        "request_body_bytes": 2039,
+        "request_header_bytes": 146,
+        "response_lost": false
+      },
+      {
+        "crypto_and_inspection_ms": 0.5148,
+        "input": {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+                "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+                "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+                "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+                "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+                "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "test_key_hex": "b4b45e8e40bb2adecfcc862917d8996c179800d21ac4bdcc92eabccd4b7e8172"
+        },
+        "operation": "read",
+        "output": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+        "request_body_bytes": 2039,
+        "request_header_bytes": 146,
+        "response_lost": true
+      },
+      {
+        "crypto_and_inspection_ms": 0.5143,
+        "input": {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+                "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+                "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+                "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+                "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+                "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "test_key_hex": "b4b45e8e40bb2adecfcc862917d8996c179800d21ac4bdcc92eabccd4b7e8172"
+        },
+        "operation": "read",
+        "output": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+        "request_body_bytes": 2039,
+        "request_header_bytes": 146,
+        "response_lost": false
+      }
+    ],
+    "terminal_snapshot": {
+      "attempted_context_count": 1,
+      "attempted_contexts": [
+        "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20"
+      ],
+      "chain_id": "owned-loopback-cost",
+      "entries": [
+        {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "a4bfa60fdd00ccd9dbb519c901443ae32ffa85bd7130a6e3d039a1fc1bdc9e88",
+                "value": "102967ca58d04308eb9b9bbd503ea8fdbc7eb00751af722bc3ad553b3a270a32b5c165e3d33838b57055b364bbdb6acec962614bc48b0444737ad77f6afe7d465",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "a276c6c39381b37d07312ba54d6cf9fae0495f9f687dcc483624547854ff5764",
+                "value": "28c6f926f054cfa8bb90d4bf9471660ff545f9212a0da53cd96eebfe4b48a9e3d8c5cb2c0a2aa6a22502fe67b0f032784ba26cd2c9b03246b188c13421862bd46",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "08569314cbb987d4f6768510a3e5d094e885a6de4622713df61f0991c060565b",
+                "value": "49d8b415c68da5df6fdfab06cc983736aa55db4d891a99334144c4493364df137185cea07ee5b83d413ebdf99525859c80c92b91c153233732a6702a2094547c3",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "685023b628203c22e42227eb59028a21a9963570ddd041995174b01fb6a29079",
+                "value": "735e9896db7ac5ad08881e92f8b31c71dbae568c6ed64e0efb2ede1bf27ba9c18001704131696d86c508f21a687b643b68d69d88ab73d715f6d3e4616828f73dc",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "5b659e82def21963d5d4a93c4ff3cf8c0c62d4ca5110323c9b76f4c5eec3dc83",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "0b28f5082c8b5de53a2af266dc7177f0ce520c3f019071d594315a9019a7105b",
+                "value": "a558a6aa2f1c2f11858a2f6418c215c1894f6adddb40c3d0072d3976888d09ee0438b00e21b5c67eb0619aca2af1ce5503cac2b788124de2fe111dd9f84414191",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "demo",
+            "return": "v0001"
+          },
+          "context": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+          "record": {
+            "actor": "builder",
+            "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+            "chain_id": "owned-loopback-cost",
+            "context": "8789ec7da0e6e772336dcf0b5e72e9ffa0908fcb1e39930787cb30bfcfd48d20",
+            "index": 0,
+            "metadata": {},
+            "operation": "lost-recovery-read",
+            "parent": "GENESIS",
+            "signature": "a0416fe6a44e6f6dab221bb834c88ab757e955cca3e4a5d8e6637d673ba02744c51fca285f7a591e3038eac720e9f6c23f2abddcbdc9632c1c1086164e6f150a",
+            "version": "contextmark-record-v1"
+          },
+          "request_id": "e218ea98d1a86e4f05ddd5865cf72d6575aa73362934e8887974e24864ab848c",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2264656d6f222c2272657475726e223a227630303031227d",
+          "status": "success",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+            "chain_id": "owned-loopback-cost",
+            "index": 0,
+            "metadata": {},
+            "operation": "lost-recovery-read",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        }
+      ],
+      "entry_count": 1,
+      "tag": "e459a19fd0625f3950f48baae575d84218c05bfa3a6b0118e1b72d2b405276ce",
+      "version": "contextmark-registry-v1"
+    },
+    "test_keys_only": true
+  }
+]

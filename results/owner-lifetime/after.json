@@ -1,0 +1,401 @@
+[
+  {
+    "close_rejected_while_active": true,
+    "held_backend_still_active": true,
+    "held_error": "issuer closed or storage uncertain; reopen durable state",
+    "held_retry_error": "terminal backend failure: InterruptedAttempt",
+    "mark_calls_after_recovery": [
+      {
+        "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+        "module": "peer"
+      }
+    ],
+    "mark_calls_before_recovery": [
+      {
+        "context": "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4",
+        "module": "held"
+      }
+    ],
+    "mode": "reservation-error",
+    "peer_error": "durable registry write failed; issuer stopped",
+    "peer_retry_verified": true,
+    "recovered_snapshot": {
+      "attempted_context_count": 2,
+      "attempted_contexts": [
+        "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+        "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4"
+      ],
+      "chain_id": "owned-owner-lifetime",
+      "entries": [
+        {
+          "context": "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4",
+          "failure_code": "InterruptedAttempt",
+          "request_id": "0bf411d6697353dfd01b5da6929395ebc4fb051444cbdd971e6020938447cafc",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2268656c64222c2272657475726e223a227630303031227d",
+          "status": "failed",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "9814f237f2ec815ae0a15704a51c9f35f17160d27193b5d2220920fb2b056cdf",
+            "chain_id": "owned-owner-lifetime",
+            "index": 0,
+            "metadata": {},
+            "operation": "held",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        },
+        {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "101effe868b5cafea484cb35a31af91040f3dc269789f2b6ed75aeb36211a8cf",
+                "value": "1194ade0f0f02927d92e2481c7dec103c038fe9cc9cfa3f45f59a20d9465d20cc188e2dceeb3aa84963492c496f39adb0cc802a6cd8a15f45632c20d5b2d3be6d",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "fad1e749adb81c6912a724f6e9a9426ef4c1c8edbae8234fc5ac0658ebc65ffa",
+                "value": "39fccb478181ea14749c39b51bc95aaf1b35209fca4d06aeb12dcb18ab9de657583827d446e113e57da3302450eedfbde5afe84b0bc6115d74a962a3344e6dee2",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "c16c7d036720d28f7c4dfa2572f3dded23ca37fff2530d6f65c582c30276baac",
+                "value": "79385833b1b542c5d24a3f99fbbfcd0210f466090178282ef57c7b2145a83cdfcf1b8ec1361db2c8d457cc634c3b8065e8a1820b1dc02ea72303dfcd4bdbfc4d7",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "130c5359a247c8cb54e165fe4ebbffa1ceecc2f9ab5b04a3a53de65686865a88",
+                "value": "cf4754a5818a333bf238363067c217fca176ced86f5108752c45b2276284d5a6263317a3bc69872e9a52678188d97cd3159ccfe703786dd16142398ba1d5e704c",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "39916f81218a8353795d1e16b83b8d24b72efdafa5031cdfdbf9aba1b6318fd6",
+                "value": "13c29c09cf100bb76d4661d785fd03b9eccbc5b0e13d7a7815589702b0233b0aa5d7ec27bd9c49116cf93017f06c8d5056ca1d1debceecedc2f646fde363c2e141",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "peer",
+            "return": "v0001"
+          },
+          "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+          "record": {
+            "actor": "builder",
+            "binder": "3a06ebfd11aa118ecb193e3be957b626b5aa335d8f0b0dcac1ef5f3fd585ce74",
+            "chain_id": "owned-owner-lifetime",
+            "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+            "index": 0,
+            "metadata": {},
+            "operation": "peer",
+            "parent": "GENESIS",
+            "signature": "8ff6570e7748ff3d21fa75b9ea120cbe8de8b00a02d9d6aafb2a3ece0ed6825bc04fce27a749600b147a7b57ebfa51537b58c2012257457478940f322917e102",
+            "version": "contextmark-record-v1"
+          },
+          "request_id": "46b672cf4d2de2204e15a490cae083fd91a104c2f416780fefc87546db862c37",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2270656572222c2272657475726e223a227630303031227d",
+          "status": "success",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "3a06ebfd11aa118ecb193e3be957b626b5aa335d8f0b0dcac1ef5f3fd585ce74",
+            "chain_id": "owned-owner-lifetime",
+            "index": 0,
+            "metadata": {},
+            "operation": "peer",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        }
+      ],
+      "entry_count": 2,
+      "tag": "07dde424c2668c453b79e8f8edf22dbe4a4cd540157d2dbf2d47bfe7c34be010",
+      "version": "contextmark-registry-v1"
+    },
+    "requests": [
+      {
+        "actor": "builder",
+        "operation": "held",
+        "parent_chain": [],
+        "program": {
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "held",
+          "return": "v0001"
+        }
+      },
+      {
+        "actor": "builder",
+        "operation": "peer",
+        "parent_chain": [],
+        "program": {
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "peer",
+          "return": "v0001"
+        }
+      }
+    ],
+    "schedule": [
+      "held request reserved and backend entered"
+    ],
+    "second_owner_excluded_while_active": true,
+    "storage_failed": true
+  },
+  {
+    "close_rejected_while_active": true,
+    "held_backend_still_active": true,
+    "held_error": "issuer closed or storage uncertain; reopen durable state",
+    "held_retry_error": "terminal backend failure: InterruptedAttempt",
+    "mark_calls_after_recovery": [],
+    "mark_calls_before_recovery": [
+      {
+        "context": "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4",
+        "module": "held"
+      },
+      {
+        "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+        "module": "peer"
+      }
+    ],
+    "mode": "terminal-ambiguous",
+    "peer_error": "durable registry write failed; issuer stopped",
+    "peer_retry_verified": true,
+    "recovered_snapshot": {
+      "attempted_context_count": 2,
+      "attempted_contexts": [
+        "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+        "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4"
+      ],
+      "chain_id": "owned-owner-lifetime",
+      "entries": [
+        {
+          "context": "d00e173111a43f55e9f3a562ef6ee58ce729317a76d290569442ed455e6d3bd4",
+          "failure_code": "InterruptedAttempt",
+          "request_id": "0bf411d6697353dfd01b5da6929395ebc4fb051444cbdd971e6020938447cafc",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2268656c64222c2272657475726e223a227630303031227d",
+          "status": "failed",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "9814f237f2ec815ae0a15704a51c9f35f17160d27193b5d2220920fb2b056cdf",
+            "chain_id": "owned-owner-lifetime",
+            "index": 0,
+            "metadata": {},
+            "operation": "held",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        },
+        {
+          "artifact": {
+            "_threshold_carriers": [
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 1,
+                "n": 5,
+                "t": 3,
+                "tag": "101effe868b5cafea484cb35a31af91040f3dc269789f2b6ed75aeb36211a8cf",
+                "value": "1194ade0f0f02927d92e2481c7dec103c038fe9cc9cfa3f45f59a20d9465d20cc188e2dceeb3aa84963492c496f39adb0cc802a6cd8a15f45632c20d5b2d3be6d",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 2,
+                "n": 5,
+                "t": 3,
+                "tag": "fad1e749adb81c6912a724f6e9a9426ef4c1c8edbae8234fc5ac0658ebc65ffa",
+                "value": "39fccb478181ea14749c39b51bc95aaf1b35209fca4d06aeb12dcb18ab9de657583827d446e113e57da3302450eedfbde5afe84b0bc6115d74a962a3344e6dee2",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 3,
+                "n": 5,
+                "t": 3,
+                "tag": "c16c7d036720d28f7c4dfa2572f3dded23ca37fff2530d6f65c582c30276baac",
+                "value": "79385833b1b542c5d24a3f99fbbfcd0210f466090178282ef57c7b2145a83cdfcf1b8ec1361db2c8d457cc634c3b8065e8a1820b1dc02ea72303dfcd4bdbfc4d7",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 4,
+                "n": 5,
+                "t": 3,
+                "tag": "130c5359a247c8cb54e165fe4ebbffa1ceecc2f9ab5b04a3a53de65686865a88",
+                "value": "cf4754a5818a333bf238363067c217fca176ced86f5108752c45b2276284d5a6263317a3bc69872e9a52678188d97cd3159ccfe703786dd16142398ba1d5e704c",
+                "version": "threshold-carrier-v1"
+              },
+              {
+                "commitment": "b1872c625d13aeaf94382e370d54c672a783dba87e5e8b40c331c36c02d6caa2",
+                "index": 5,
+                "n": 5,
+                "t": 3,
+                "tag": "39916f81218a8353795d1e16b83b8d24b72efdafa5031cdfdbf9aba1b6318fd6",
+                "value": "13c29c09cf100bb76d4661d785fd03b9eccbc5b0e13d7a7815589702b0233b0aa5d7ec27bd9c49116cf93017f06c8d5056ca1d1debceecedc2f646fde363c2e141",
+                "version": "threshold-carrier-v1"
+              }
+            ],
+            "body": [
+              {
+                "left": 0,
+                "op": "add",
+                "right": 3,
+                "target": "v0000"
+              },
+              {
+                "left": 1,
+                "op": "xor",
+                "right": 20,
+                "target": "v0001"
+              }
+            ],
+            "language": "finite-expr-v1",
+            "module": "peer",
+            "return": "v0001"
+          },
+          "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+          "record": {
+            "actor": "builder",
+            "binder": "3a06ebfd11aa118ecb193e3be957b626b5aa335d8f0b0dcac1ef5f3fd585ce74",
+            "chain_id": "owned-owner-lifetime",
+            "context": "b0dbfdb2d9576a61e0bf4441e49b1bd5de9d11e630c3c6bc79ffe0bc07866378",
+            "index": 0,
+            "metadata": {},
+            "operation": "peer",
+            "parent": "GENESIS",
+            "signature": "8ff6570e7748ff3d21fa75b9ea120cbe8de8b00a02d9d6aafb2a3ece0ed6825bc04fce27a749600b147a7b57ebfa51537b58c2012257457478940f322917e102",
+            "version": "contextmark-record-v1"
+          },
+          "request_id": "46b672cf4d2de2204e15a490cae083fd91a104c2f416780fefc87546db862c37",
+          "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2270656572222c2272657475726e223a227630303031227d",
+          "status": "success",
+          "unsigned": {
+            "actor": "builder",
+            "binder": "3a06ebfd11aa118ecb193e3be957b626b5aa335d8f0b0dcac1ef5f3fd585ce74",
+            "chain_id": "owned-owner-lifetime",
+            "index": 0,
+            "metadata": {},
+            "operation": "peer",
+            "parent": "GENESIS",
+            "version": "contextmark-record-v1"
+          }
+        }
+      ],
+      "entry_count": 2,
+      "tag": "07dde424c2668c453b79e8f8edf22dbe4a4cd540157d2dbf2d47bfe7c34be010",
+      "version": "contextmark-registry-v1"
+    },
+    "requests": [
+      {
+        "actor": "builder",
+        "operation": "held",
+        "parent_chain": [],
+        "program": {
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "held",
+          "return": "v0001"
+        }
+      },
+      {
+        "actor": "builder",
+        "operation": "peer",
+        "parent_chain": [],
+        "program": {
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "peer",
+          "return": "v0001"
+        }
+      }
+    ],
+    "schedule": [
+      "held request reserved and backend entered"
+    ],
+    "second_owner_excluded_while_active": true,
+    "storage_failed": true
+  }
+]

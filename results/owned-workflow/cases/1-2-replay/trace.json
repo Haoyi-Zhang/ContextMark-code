@@ -1,0 +1,617 @@
+{
+  "client_events": [
+    {
+      "error": null,
+      "operation": "mark",
+      "request_body_bytes": 341,
+      "response_body_bytes": 1954,
+      "response_header_bytes": 166,
+      "rpc_ms": 1.023
+    },
+    {
+      "error": null,
+      "operation": "read",
+      "request_body_bytes": 2038,
+      "response_body_bytes": 77,
+      "response_header_bytes": 164,
+      "rpc_ms": 1.0259
+    },
+    {
+      "error": null,
+      "operation": "read",
+      "request_body_bytes": 2038,
+      "response_body_bytes": 77,
+      "response_header_bytes": 164,
+      "rpc_ms": 1.0374
+    },
+    {
+      "error": null,
+      "operation": "read",
+      "request_body_bytes": 2038,
+      "response_body_bytes": 77,
+      "response_header_bytes": 164,
+      "rpc_ms": 1.0269
+    }
+  ],
+  "pair": [
+    [
+      {
+        "actor": "builder",
+        "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+        "chain_id": "owned-loopback-cost",
+        "context": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+        "index": 0,
+        "metadata": {
+          "sample": 2,
+          "stage": 0
+        },
+        "operation": "owned-stage",
+        "parent": "GENESIS",
+        "signature": "711ce7ef131d063559324cfc5a04386114d9c48ebf317dc404294f4a36174af951fcee5b38b9a3b13325424a078707622a3de99df2a5ed5b7f6282ecf78f2708",
+        "version": "contextmark-record-v1"
+      }
+    ],
+    {
+      "_threshold_carriers": [
+        {
+          "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+          "index": 1,
+          "n": 5,
+          "t": 3,
+          "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+          "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+          "version": "threshold-carrier-v1"
+        },
+        {
+          "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+          "index": 2,
+          "n": 5,
+          "t": 3,
+          "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+          "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+          "version": "threshold-carrier-v1"
+        },
+        {
+          "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+          "index": 3,
+          "n": 5,
+          "t": 3,
+          "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+          "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+          "version": "threshold-carrier-v1"
+        },
+        {
+          "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+          "index": 4,
+          "n": 5,
+          "t": 3,
+          "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+          "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+          "version": "threshold-carrier-v1"
+        },
+        {
+          "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+          "index": 5,
+          "n": 5,
+          "t": 3,
+          "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+          "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+          "version": "threshold-carrier-v1"
+        }
+      ],
+      "body": [
+        {
+          "left": 0,
+          "op": "add",
+          "right": 3,
+          "target": "v0000"
+        },
+        {
+          "left": 1,
+          "op": "xor",
+          "right": 20,
+          "target": "v0001"
+        }
+      ],
+      "language": "finite-expr-v1",
+      "module": "demo",
+      "return": "v0001"
+    }
+  ],
+  "requests": [
+    {
+      "actor": "builder",
+      "metadata": {
+        "sample": 2,
+        "stage": 0
+      },
+      "operation": "owned-stage",
+      "parent_chain": [],
+      "program": {
+        "body": [
+          {
+            "left": 0,
+            "op": "add",
+            "right": 3,
+            "target": "v0000"
+          },
+          {
+            "left": 1,
+            "op": "xor",
+            "right": 20,
+            "target": "v0001"
+          }
+        ],
+        "language": "finite-expr-v1",
+        "module": "demo",
+        "return": "v0001"
+      }
+    }
+  ],
+  "row": {
+    "acquisition_ms": 3.0237,
+    "all_retries_without_mark": true,
+    "artifact_bytes": 1943,
+    "database_bytes": 20480,
+    "depth": 1,
+    "exact_retry_ms": 0.2758,
+    "final_close_teardown_ms": 18.1796,
+    "first_close_ms": 0.0699,
+    "full_workflow_ms": 30.1012,
+    "http_request_bytes": 7038,
+    "http_response_bytes": 2843,
+    "issue_export_ms": 5.0922,
+    "manifest_bytes": 473,
+    "mark_calls": 1,
+    "mode": "replay",
+    "pending_before_every_mark": true,
+    "read_calls": 3,
+    "reopen_ms": 2.1125,
+    "rpc_ms": 4.1132,
+    "sample": 2,
+    "verify_serialize_snapshot_ms": 1.3469,
+    "warmup": false
+  },
+  "server_events": [
+    {
+      "committed_status_before_mark": "pending",
+      "crypto_and_inspection_ms": 0.3987,
+      "input": {
+        "payload": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+        "program": {
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "test_key_hex": "9caf9afb28e9c596bc51fc2ceca47da2933836753c0304911a9a6abd637abffb"
+      },
+      "operation": "mark",
+      "output": {
+        "_threshold_carriers": [
+          {
+            "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+            "index": 1,
+            "n": 5,
+            "t": 3,
+            "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+            "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+            "index": 2,
+            "n": 5,
+            "t": 3,
+            "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+            "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+            "index": 3,
+            "n": 5,
+            "t": 3,
+            "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+            "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+            "index": 4,
+            "n": 5,
+            "t": 3,
+            "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+            "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+            "version": "threshold-carrier-v1"
+          },
+          {
+            "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+            "index": 5,
+            "n": 5,
+            "t": 3,
+            "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+            "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+            "version": "threshold-carrier-v1"
+          }
+        ],
+        "body": [
+          {
+            "left": 0,
+            "op": "add",
+            "right": 3,
+            "target": "v0000"
+          },
+          {
+            "left": 1,
+            "op": "xor",
+            "right": 20,
+            "target": "v0001"
+          }
+        ],
+        "language": "finite-expr-v1",
+        "module": "demo",
+        "return": "v0001"
+      },
+      "request_body_bytes": 341,
+      "request_header_bytes": 145,
+      "response_lost": false
+    },
+    {
+      "crypto_and_inspection_ms": 0.504,
+      "input": {
+        "artifact": {
+          "_threshold_carriers": [
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+              "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+              "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+              "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+              "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+              "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "test_key_hex": "9caf9afb28e9c596bc51fc2ceca47da2933836753c0304911a9a6abd637abffb"
+      },
+      "operation": "read",
+      "output": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+      "request_body_bytes": 2038,
+      "request_header_bytes": 146,
+      "response_lost": false
+    },
+    {
+      "crypto_and_inspection_ms": 0.4973,
+      "input": {
+        "artifact": {
+          "_threshold_carriers": [
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+              "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+              "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+              "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+              "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+              "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "test_key_hex": "9caf9afb28e9c596bc51fc2ceca47da2933836753c0304911a9a6abd637abffb"
+      },
+      "operation": "read",
+      "output": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+      "request_body_bytes": 2038,
+      "request_header_bytes": 146,
+      "response_lost": false
+    },
+    {
+      "crypto_and_inspection_ms": 0.5054,
+      "input": {
+        "artifact": {
+          "_threshold_carriers": [
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+              "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+              "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+              "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+              "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+              "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "test_key_hex": "9caf9afb28e9c596bc51fc2ceca47da2933836753c0304911a9a6abd637abffb"
+      },
+      "operation": "read",
+      "output": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+      "request_body_bytes": 2038,
+      "request_header_bytes": 146,
+      "response_lost": false
+    }
+  ],
+  "snapshot": {
+    "attempted_context_count": 1,
+    "attempted_contexts": [
+      "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616"
+    ],
+    "chain_id": "owned-loopback-cost",
+    "entries": [
+      {
+        "artifact": {
+          "_threshold_carriers": [
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 1,
+              "n": 5,
+              "t": 3,
+              "tag": "b870158728096b0c52736a80d96dbacd404fa88551f12a7f52748bbe6da2a7ff",
+              "value": "664586ca7cfbab872c1e5d6d34e3cfaf3a4958c7cda42386546923128c0d520e55db41e9669c1cb06670ab7b31b1592e869210960c8a120329e832170b7c95a3",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 2,
+              "n": 5,
+              "t": 3,
+              "tag": "ad9be8af6b9e70a38d1a0077cc839bdd59dc5a6f18ae7af78b271bd2df1c4e71",
+              "value": "10d3e4a2e0dce11d298ee9e288f050d1c230a19858bcdb08821458e7e5d33c1484c20ad47ee755facf00a97d16190109e1f7088256227688c184bf14a0177643e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 3,
+              "n": 5,
+              "t": 3,
+              "tag": "e2e41d8a3429c98cbaedd7a8f3257126cbc0726b18685991875122fe66bd8cea",
+              "value": "1f4ea4a2ab27732e24670c2320e63b846ba4242393a7ca7056695424373734dae697a59de1dca9f3a8a7706fedc5947ee82fade3774e52e63e7c782fade4601e7",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 4,
+              "n": 5,
+              "t": 3,
+              "tag": "b6a56516c05aef546fc532dd817bf61803b6c46e6f0d5b9c5e453f97859ae6a7",
+              "value": "31d4986c06af70eb634a4c989b2ffd12efff1d2e2d9b106fe24583e61cecbf740ade847abf49bdb5935b5f903a20cff1fb13112cc44c3638a985ae729a1e86e9e",
+              "version": "threshold-carrier-v1"
+            },
+            {
+              "commitment": "6bf82919ccd7c3780ec4d80598e44ca7234d19959015f29166bb325d4368f9c4",
+              "index": 5,
+              "n": 5,
+              "t": 3,
+              "tag": "bc225aa419ae5f9de502be0ad97c94b58abd51eb2fb7af895a9889643f1eeccd",
+              "value": "4865bffef374da54e638ab42f7cd957d4f418cb82696ad0725a8e82d96f3dbdff196a76b172e91408f1c76ddfb2ab3631aa1325e3d1c208002a061dd64c5eaa63",
+              "version": "threshold-carrier-v1"
+            }
+          ],
+          "body": [
+            {
+              "left": 0,
+              "op": "add",
+              "right": 3,
+              "target": "v0000"
+            },
+            {
+              "left": 1,
+              "op": "xor",
+              "right": 20,
+              "target": "v0001"
+            }
+          ],
+          "language": "finite-expr-v1",
+          "module": "demo",
+          "return": "v0001"
+        },
+        "context": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+        "record": {
+          "actor": "builder",
+          "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+          "chain_id": "owned-loopback-cost",
+          "context": "86aa17c2863ed644eda941fc4cbd219fb85f7789740d2ac91c9c4561fc559616",
+          "index": 0,
+          "metadata": {
+            "sample": 2,
+            "stage": 0
+          },
+          "operation": "owned-stage",
+          "parent": "GENESIS",
+          "signature": "711ce7ef131d063559324cfc5a04386114d9c48ebf317dc404294f4a36174af951fcee5b38b9a3b13325424a078707622a3de99df2a5ed5b7f6282ecf78f2708",
+          "version": "contextmark-record-v1"
+        },
+        "request_id": "a79d3641d57c1ee4be245b561193b19a228cca5480f000df95f3827228e5571a",
+        "request_program_hex": "7b22626f6479223a5b7b226c656674223a302c226f70223a22616464222c227269676874223a332c22746172676574223a227630303030227d2c7b226c656674223a312c226f70223a22786f72222c227269676874223a32302c22746172676574223a227630303031227d5d2c226c616e6775616765223a2266696e6974652d657870722d7631222c226d6f64756c65223a2264656d6f222c2272657475726e223a227630303031227d",
+        "status": "success",
+        "unsigned": {
+          "actor": "builder",
+          "binder": "bff3b7b7a907c5a32d2ddf4ed116cf2b7e5cc296df6740ce3d8e852e31a509bf",
+          "chain_id": "owned-loopback-cost",
+          "index": 0,
+          "metadata": {
+            "sample": 2,
+            "stage": 0
+          },
+          "operation": "owned-stage",
+          "parent": "GENESIS",
+          "version": "contextmark-record-v1"
+        }
+      }
+    ],
+    "entry_count": 1,
+    "tag": "a202aa40c61a238dd5a249acfd1360b4483b9b8357485b5c74d1b1c0ff7c4093",
+    "version": "contextmark-registry-v1"
+  }
+}

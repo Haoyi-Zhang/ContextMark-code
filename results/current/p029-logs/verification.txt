@@ -1,0 +1,12 @@
+{
+  "status": "package_checks_completed",
+  "mode": "standalone_artifact",
+  "root": "/home/runner/work/ContextMark/ContextMark",
+  "execution_files": 67,
+  "release_files": null,
+  "references": "not applicable to standalone artifact",
+  "pdf": "not applicable to standalone artifact",
+  "tests": "skipped by explicit flag",
+  "tree_unchanged": true,
+  "external_baseline": "not executed; see local_execution_gaps.json"
+}

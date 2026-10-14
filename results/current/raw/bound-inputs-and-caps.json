@@ -1,0 +1,21 @@
+{
+  "integer_query_caps": {
+    "collusion": 166,
+    "nontransfer": 2497,
+    "removal": 333,
+    "unforgeability": 999
+  },
+  "rates": {
+    "delta_sep": 4e-06,
+    "delta_stab": 1e-05,
+    "eps_col": 5e-05,
+    "eps_hash": 1e-12,
+    "eps_nt": 5e-06,
+    "eps_prf": 1e-09,
+    "eps_rm": 2e-05,
+    "eps_sig": 1e-09,
+    "eps_uf": 1e-05
+  },
+  "records_per_context": 4.0,
+  "target_probability": 0.01
+}

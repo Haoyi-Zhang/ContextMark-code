@@ -12,7 +12,8 @@ from contextmark.canonical import canonical_bytes
 from contextmark.compiler import AuthenticatedEnvelopeBackend, ContextMarkCompiler, make_demo_program
 
 ARTIFACT_ROOT = Path(__file__).resolve().parents[1]
-WORK_ROOT = ARTIFACT_ROOT / "results" / "durable-repair-work"
+WORK_ROOT = Path(os.environ.get("CONTEXTMARK_OWNED_WORK_ROOT",
+                               str(ARTIFACT_ROOT / "results" / "durable-repair-work"))).resolve()
 
 
 class OwnedStubBackend:

@@ -30,7 +30,7 @@ import sys
 from typing import Any
 
 DEFAULT_PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_TESTS = 128
+EXPECTED_TESTS = 133
 
 
 def require(condition: bool, message: str) -> None:

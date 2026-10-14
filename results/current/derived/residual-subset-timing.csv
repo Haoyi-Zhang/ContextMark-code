@@ -1,0 +1,4 @@
+n,t,samples,legacy_subsets,residual_points,residual_read_median_us,residual_read_p95_us,subset_read_median_us,subset_read_p95_us,subset_timing_status
+5,3,31,10,2,570.231,594.656,8469.272,8507.606,measured
+10,5,31,252,5,2342.323,3157.946,577713.707,720208.448,measured
+32,16,31,601080390,16,8983.8,9026.971,,,not_run_declared_combinatorial_boundary

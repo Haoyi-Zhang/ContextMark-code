@@ -154,6 +154,9 @@ class ContextMarkCompiler:
         self._durable: DurableRegistry | None = None
         self._closed = False
         self._storage_failed = False
+        # Pending durable rows can outlive a call. Active work cannot outlive
+        # ownership, even when an unrelated write has stopped the issuer.
+        self._active_attempts = 0
         if registry_path is not None:
             try:
                 self._durable = DurableRegistry(registry_path, master_key=self.master_key, chain_id=self.chain_id)
@@ -228,7 +231,7 @@ class ContextMarkCompiler:
 
     def close(self) -> None:
         with self._registry_lock:
-            if any(state["status"] == "pending" for state in self._requests.values()) and not self._storage_failed:
+            if self._active_attempts or (any(state["status"] == "pending" for state in self._requests.values()) and not self._storage_failed):
                 raise ContextMarkError("cannot close while a backend attempt is pending")
             if self._durable is not None:
                 self._durable.close()
@@ -355,6 +358,18 @@ class ContextMarkCompiler:
             self._attempted_contexts.add(context)
             self._context_owner[context] = request_id
             self._requests[request_id] = pending
+            self._active_attempts += 1
+
+        try:
+            return self._complete_reserved_attempt(parent_chain, request_program, unsigned,
+                context, request_id, pending, actor, _return_chain)
+        finally:
+            with self._registry_lock:
+                self._active_attempts -= 1
+
+    def _complete_reserved_attempt(self, parent_chain, request_program, unsigned,
+                                   context, request_id, pending, actor, _return_chain):
+        """Finish one already-reserved call while its owner remains retained."""
 
         try:
             key = self.derive_watermark_key(context)

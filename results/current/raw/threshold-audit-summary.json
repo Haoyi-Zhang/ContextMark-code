@@ -1,0 +1,15 @@
+{
+  "coalition_canonical_selection_mismatches": 0,
+  "coalition_cells": 4352,
+  "coalition_trace_mismatches": 0,
+  "deletion_cases": 32,
+  "passed": true,
+  "shared_key_candidate_set_mismatches": 0,
+  "shared_key_canonical_selection_mismatches": 0,
+  "shared_key_two_group_cells": 256,
+  "single_mutation_cases": 25,
+  "single_mutations_all_still_read": true,
+  "three_contributor_cells": 4096,
+  "trace_contract": "Gamma binds each valid signed tip d_j to its compiler-derived key k_j; Trace_Gamma(Y) is the set of j for which Read_{k_j}(Y)=d_j; a scalar contributor is the lexicographically smallest traced context",
+  "two_contributor_cells": 256
+}

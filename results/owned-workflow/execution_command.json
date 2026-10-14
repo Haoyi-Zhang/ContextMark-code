@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact\\owned_network_workflow.py",
+    "--out",
+    "D:/CodexProjects/2026-07-13/new-chat-4/completion_workspace/library_review/private/substantive_library_completion/P029/loopback-run-complete/raw",
+    "--work",
+    "D:/CodexProjects/2026-07-13/new-chat-4/completion_workspace/library_review/private/substantive_library_completion/P029/loopback-run-complete/raw-work",
+    "--cpu-name",
+    "12th Gen Intel Core i7-12700KF (observed Win32_Processor)",
+    "--filesystem",
+    "D: NTFS fixed local volume (observed Win32_LogicalDisk DriveType=3)"
+  ],
+  "cwd": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact",
+  "exit_code": 0,
+  "wall_seconds": 13.03676029999042,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.28000-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "script_sha256": "5d7413f689bcc0fdb3152a1b54a56220d77afdc3221be6a97ea8808596882cfd",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "TMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\loopback-run-complete\\temp",
+    "TEMP": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\loopback-run-complete\\temp",
+    "CONTEXTMARK_OWNED_WORK_ROOT": "D:\\CodexProjects\\2026-07-13\\new-chat-4\\completion_workspace\\library_review\\private\\substantive_library_completion\\P029\\loopback-run-complete\\work",
+    "PYTHONPATH": "D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact;D:\\CodexProjects\\wg-check\\substantive-library\\P029\\artifact\\tests"
+  }
+}

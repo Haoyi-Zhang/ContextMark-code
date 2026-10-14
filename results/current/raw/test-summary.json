@@ -1,0 +1,8 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python -m unittest discover -s tests -v",
+  "deterministic_test_count": 101,
+  "failed": 0,
+  "passed": 101,
+  "returncode": 0,
+  "valid": true
+}

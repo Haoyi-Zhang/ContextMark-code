@@ -37,7 +37,16 @@ The full-package command checks paper and citation keys, parses the current PDFs
 
 Requirements are CPU-only Python 3.12 or later and the two versions in `requirements.txt`. A complete run can also use `python -B run_experiments.py --out reproduced`. The output directory must be absent or empty at preparation; existing evidence is never deleted. A sharded continuation must use the same output directory. Its version-2 manifest binds current sources against the artifact root and generated evidence against the output root, including when output is outside this repository.
 
-`results/` retains the earlier Linux campaign and its original source bindings and 89-test result. The collection now has 127 tests: the previous 107 plus 20 durable-state tests. A focused repair run executes 37 tests (20 new durability, six existing restore/session, seven request-transcript and four risk-input checks), all passing without skips on Windows with CPython 3.12.14, cryptography 50.0.2, and SQLite 3.53.1. The subsequent canonical GitHub scientific run passed all 127 tests, as detailed below; it did not replace the archived local campaigns. Historical CPU measurements are not overwritten or relabeled as current runs. After source changes, the old run manifest is expected not to match current sources; do not refresh its digests to conceal that difference. The bounded durability output is a separate evidence format, not a complete `verify_release.py --evidence-dir` campaign.
+`results/` retains the earlier Linux campaign, original source bindings and
+89-test result. Historical focused and CI records remain separate. The present
+collection has 133 tests: the 128-test source snapshot plus two owner-lifetime
+and three loopback checks. The current reviewed state/RPC subset executes 43
+tests without skips (21 durable, six restore/session, seven request-transcript,
+four risk-input, two owner-lifetime and three loopback). Its results are in
+`results/owned-workflow/tests.json`. This subset does not rerun the archived
+attack/probability campaigns. Historical CPU data and source bindings are not
+overwritten or relabeled; an old manifest is expected not to match changed
+sources. The bounded outputs are not a complete `verify_release.py` campaign.
 
 Recovery authenticates snapshots and additionally validates request identities, canonical program bytes, request-to-record agreement, and successful ancestry of every non-genesis terminal attempt. The optional `registry_path` adds a single-owner authenticated SQLite ledger with pending reservation committed before key derivation/marking, terminal success/failure committed before release, and conservative restart recovery. It does not prevent rollback to an older authenticated snapshot. Risk formulas require nonnegative integer budgets and valid primitive probabilities; invalid inputs are rejected, not assigned a zero-security-loss result.
 
@@ -54,6 +63,39 @@ The parent directory must already exist on reliable local storage. SQLite uses `
 
 These guarantees depend on protected files and real filesystem flush/locking behavior; there is no anti-rollback witness, distributed replica coordination, or power-loss validation. Deleting/replacing the database or switching to an untracked fresh path is outside the storage-freshness premise.
 
+Live post-reservation calls also retain ownership when another request encounters
+a storage error. An active-attempt counter covers dispatch, postchecks and
+terminal handling; close refuses until every live call unwinds. Stored pending
+rows may then remain for conservative recovery. This is local quiescence, not
+remote cancellation. A remote adapter must send once or use server-side attempt
+deduplication; an uncertain mark response must not trigger a second sample.
+
+## Owned real-carrier loopback workflow
+
+`owned_network_workflow.py` executes the actual finite `(5,3)` threshold adapter
+over local HTTP, with durable SQLite, Ed25519 and the existing SHA/HMAC domains.
+Only 127.0.0.1 with an OS-assigned port is used; there is no configurable external
+target. Plaintext deterministic test keys are intentional fixture input, not a
+secure key-transport protocol. See `OWNED_WORKFLOW.md` for complete boundaries.
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python -B owned_network_workflow.py --out /tmp/owned-results --work /tmp/owned-cases --cpu-name "OBSERVED CPU" --filesystem "OBSERVED FILESYSTEM"
+PYTHONDONTWRITEBYTECODE=1 python -B owned_network_workflow.py --out /tmp/owned-results --work /tmp/owned-cases --check
+PYTHONDONTWRITEBYTECODE=1 python -B reproduce_owned_failures.py --out /tmp/owned-failures --work /tmp/owned-failure-cases
+```
+
+Output/work directories must be absent. `results/owned-workflow/` retains all
+36 path runs (15 measured plus three warm-up pairs), 492 observed marks, 1,020
+reads, HTTP inputs/outputs and raw databases. Before every mark a separate SQL
+connection observes committed pending state. Session/replay canonical requests,
+pairs and terminal bytes agree, including semantic reopen and all exact retries.
+No retry adds a mark. The complete-cost medians are 29.5657/29.3156,
+99.6529/98.4027 and 763.7503/804.7971 ms at depths 1/8/32 (session/replay).
+Session is not faster at the first two depths under this full boundary.
+Response-loss negatives remain separately under `results/owned-failures/`.
+Owner-interleaving pre/post outputs remain under `results/owner-lifetime/`.
+The checker reconciles recorded values; it does not rerun network/crypto work.
+
 The safe bounded entrypoint runs owned stub services only:
 
 ```bash
@@ -61,7 +103,14 @@ python -B -m unittest discover -s tests -p test_durable_registry.py -v
 python -B run_durable_experiment.py --out results/NEW-DIRECTORY --cpu-name "OBSERVED-CPU" --filesystem "OBSERVED-LOCAL-FILESYSTEM"
 ```
 
-Use an absent output directory. The second command runs 37 focused tests, then two warm-ups and 11 measured pairs at depths 1, 8, and 32. It records all 39 pairs, matched terminal bytes, reopen/retry checks and environment metadata. The measured local run is in `results/durable-state/`. Its cryptography version is 50.0.2, not the historical 46.0.4 pin; the dependency specification for that earlier campaign is unchanged. The ordinary durable-state path uses the same authenticated storage and identical prevalidated bytes, excluding their preparation/signing/marking/checking. It is a persistence-cost reference, not an end-to-end watermark-free provenance competitor or a novelty result.
+Use an absent output directory. The current second command selects 38 focused
+tests, then two warm-ups and 11 measured pairs at depths 1, 8, and 32. It retains
+all 39 pairs and matched terminal bytes. The historical local run in
+`results/durable-state/` used its then-current 37-test selection and cryptography
+50.0.2, not the Linux 46.0.4 pin; those recorded values are unchanged. The ordinary
+path shares storage and receives identical prevalidated bytes, excluding their
+preparation/signing/marking/checking. It is a persistence reference, not an
+end-to-end provenance competitor or novelty result.
 
 The `scientific-checks.yml` workflow targets a flat artifact repository on Ubuntu 24.04. It installs the declared dependencies, bounds the complete owned finite run, retains scientific failure gates, and uploads raw output even after failure. The retained Linux run in `results/current/` passed the then-current 101 tests without skips, rejected all 47 mutations, and checked 4,352 compiled coalition cells, 128 closure cases, 4,802 field-reader cases and 496 threshold cases. Recovery and terminal-state checks passed in that run. Its CPU measurements remain tied to that execution.
 
